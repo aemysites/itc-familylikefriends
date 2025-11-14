@@ -45,3 +45,31 @@
     padding: 40px 32px;
   }
 }
+
+.hero.hero4.block {
+  background: #fff;                   /* Solid white background */
+  position: relative;
+  display: flex;                      /* Side by side layout for children */
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 3px solid #d68642;   /* Thin orange line at bottom */
+  margin: 0;
+  padding: 0;
+}
+
+.hero.hero4.block > div {
+  flex: 1 1 0;                        /* Each side takes equal space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive stacking for smaller screens */
+@media (width <= 600px) {
+  .hero.hero4.block {
+    flex-direction: column;
+  }
+}
