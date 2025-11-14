@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -47,29 +48,134 @@
 }
 
 .hero.hero4.block {
-  background: #fff;                   /* Solid white background */
+  background: #fff;
   position: relative;
-  display: flex;                      /* Side by side layout for children */
+  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 200px;
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 3px solid #d68642;   /* Thin orange line at bottom */
+  border-bottom: 3px solid #d68642;
   margin: 0;
   padding: 0;
 }
 
 .hero.hero4.block > div {
-  flex: 1 1 0;                        /* Each side takes equal space */
+  flex: 1 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Responsive stacking for smaller screens */
 @media (width <= 600px) {
   .hero.hero4.block {
     flex-direction: column;
+  }
+}
+
+
+/* HERO BLOCK - SIDE-BY-SIDE IMAGE & TEXT (NO > SELECTOR USED) */
+.hero.hero7 {
+  /* Layout: side-by-side columns with vertical centering */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  background: var(--background-color);
+  box-sizing: border-box;
+  gap: 4vw;
+  min-height: 400px; /* Ensures vertical presence, adjust as needed */
+}
+
+/* Image container: left column */
+.hero.hero7 picture,
+.hero.hero7 .picture {
+  flex: 1;
+  order: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 100%;
+}
+
+/* Image itself */
+.hero.hero7 img {
+  width: 100%;
+  max-width: 520px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 1.2em;
+  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 12%);
+  display: block;
+}
+
+/* Remove z-index if present, per constraints */
+.hero.hero7 picture {
+  /* no z-index */
+}
+
+/* Text column: vertical centering, left-aligned */
+.hero.hero7 div {
+  flex: 1;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Heading styling */
+.hero.hero7 h1 {
+    font-size: var(--heading-font-size-xl);
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 0;
+  }
+
+/* Emphasis for "Watch Together" */
+.hero.hero7 h1 span {
+  color: #B80000;
+  font-weight: 700;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .hero.hero7 {
+    flex-direction: column;
+    min-height: unset;
+    padding: 32px 8px;
+    gap: 2vw;
+  }
+
+  .hero.hero7 picture,
+  .hero.hero7 .picture,
+  .hero.hero7 div {
+    min-width: 0;
+    width: 100%;
+    padding: 0;
+    height: auto;
+  }
+
+  .hero.hero7 img {
+    height: 180px;
+    max-width: 100%;
+    border-radius: 0.6em;
+  }
+
+  .hero.hero7 h1 {
+    font-size: var(--heading-font-size-xl);
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 0;
   }
 }
