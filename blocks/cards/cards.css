@@ -25,3 +25,126 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+
+.cards.cardsnoimages1 {
+  background: #231207;
+  border-radius: 1.25rem;
+  max-width: 640px;
+  margin: 48px auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 400px;
+}
+
+/* Cards grid: 2 columns, 2 rows, gap between items, center inside block */
+.cards.cardsnoimages1 ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.25rem;
+  place-items: center center;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  box-sizing: border-box;
+}
+
+/* Each card fills grid cell and stacks vertically */
+.cards.cardsnoimages1 li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Card content: Cream, rounded, shadow, square, flex vertical layout */
+.cards.cardsnoimages1 .cards-card-image {
+  background: #F7EBC8;
+  border-radius: 1rem;
+  box-shadow: 0 2px 14px rgb(35 18 7 / 9%);
+  padding: 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  min-height: 150px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+}
+
+/* Optional subtle hover effect for lift */
+.cards.cardsnoimages1 .cards-card-image:hover {
+  box-shadow: 0 4px 20px rgb(35 18 7 / 13%);
+}
+
+/* Icon/Image: Centered, sized, small bottom margin */
+.cards.cardsnoimages1 .cards-card-image picture,
+.cards.cardsnoimages1 .cards-card-image img {
+  display: block;
+  margin: 0 auto 0.4rem;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+/* Prevent image stretching if SVG color filter unsupported */
+.cards.cardsnoimages1 .cards-card-image img {
+  max-width: 44px;
+  max-height: 44px;
+}
+
+/* Card text: vertical stack, center, visually distinct main/sub lines */
+.cards.cardsnoimages1 .cards-card-image p {
+  margin: 0.1rem 0 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.14rem;
+  font-weight: 600;
+  color: #231207;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make sure <br> does not add excessive spacing */
+.cards.cardsnoimages1 .cards-card-image br {
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive: Stack grid vertically on small screens */
+@media (width <= 700px) {
+  .cards.cardsnoimages1 {
+    max-width: 360px;
+    padding: 1rem 0.5rem;
+    min-height: 0;
+  }
+
+  .cards.cardsnoimages1 ul {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    max-width: 330px;
+  }
+
+  .cards.cardsnoimages1 .cards-card-image {
+    min-width: 120px;
+    min-height: 120px;
+    padding: 1rem 0.75rem;
+  }
+}
