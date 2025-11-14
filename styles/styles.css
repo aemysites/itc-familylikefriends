@@ -36,17 +36,6 @@
 @font-face {
   font-family:"Bricolage Fallback";
   font-style:normal;
-  font-weight:500;
-  src:local("Arial");
-  ascent-override:85.89%;
-  descent-override:24.94%;
-  line-gap-override:0.00%;
-  size-adjust:108.28%;
-}
-
-@font-face {
-  font-family:"Bricolage Fallback";
-  font-style:normal;
   font-weight:400;
   src:local("Arial");
   ascent-override:87.18%;
@@ -69,12 +58,23 @@
 @font-face {
   font-family:"Nunito Fallback";
   font-style:normal;
-  font-weight:600;
-  src:local("Arial Bold");
-  ascent-override:100.79%;
-  descent-override:35.19%;
+  font-weight:500;
+  src:local("Arial");
+  ascent-override:93.90%;
+  descent-override:32.79%;
   line-gap-override:0.00%;
-  size-adjust:100.31%;
+  size-adjust:107.66%;
+}
+
+@font-face {
+  font-family:"Bricolage Fallback";
+  font-style:normal;
+  font-weight:500;
+  src:local("Arial");
+  ascent-override:85.89%;
+  descent-override:24.94%;
+  line-gap-override:0.00%;
+  size-adjust:108.28%;
 }
 
 @font-face {
@@ -91,12 +91,12 @@
 @font-face {
   font-family:"Nunito Fallback";
   font-style:normal;
-  font-weight:500;
-  src:local("Arial");
-  ascent-override:93.90%;
-  descent-override:32.79%;
+  font-weight:600;
+  src:local("Arial Bold");
+  ascent-override:100.79%;
+  descent-override:35.19%;
   line-gap-override:0.00%;
-  size-adjust:107.66%;
+  size-adjust:100.31%;
 }
 
 @media (width>=900px) {
