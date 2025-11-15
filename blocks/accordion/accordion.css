@@ -69,13 +69,11 @@
   padding: 0;
 }
 
-/* Remove native marker/arrow on summary */
 .accordion.accordion5 summary::-webkit-details-marker,
 .accordion.accordion5 summary::marker {
   display: none;
 }
 
-/* Layout: row for text & icon, compact and aligned left/right */
 .accordion.accordion5 summary {
   display: flex;
   flex-direction: row;
@@ -93,11 +91,8 @@
   font-weight: 400;
   line-height: 1.4;
   cursor: pointer;
-
-  /* font-family intentionally omitted per constraints */
 }
 
-/* Remove default margin/padding from p in summary, ensure fills space */
 .accordion.accordion5 summary p {
   margin: 0;
   padding: 0;
@@ -107,11 +102,8 @@
   flex: 1 1 auto;
   line-height: inherit;
   text-align: left;
-
-  /* font-family intentionally omitted */
 }
 
-/* If an icon (e.g. svg, span, img) is present in the summary, align it */
 .accordion.accordion5 summary svg,
 .accordion.accordion5 summary img,
 .accordion.accordion5 summary span {
@@ -124,18 +116,14 @@
   min-height: 1em;
   margin-left: 1em;
   color: inherit;
-
-  /* font-family intentionally omitted */
 }
 
-/* Fix for extra space: if icon is the last element, remove trailing margin */
 .accordion.accordion5 summary svg:last-child,
 .accordion.accordion5 summary img:last-child,
 .accordion.accordion5 summary span:last-child {
   margin-right: 0;
 }
 
-/* Responsive: reduce padding and compact at smaller screens */
 @media (width <= 600px) {
   .accordion.accordion5 summary {
     padding-left: 0.75em;
@@ -148,4 +136,46 @@
   .accordion.accordion5 summary span {
     margin-left: 0.75em;
   }
+}
+
+
+.accordion-item-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #fff;
+  cursor: pointer;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #222;
+  border: none;
+}
+
+.accordion-item-label::-webkit-details-marker, 
+.accordion-item-label::marker {
+  display: none;
+}
+
+.accordion-item-label::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: #757575;
+  border-radius: 1px;
+  margin-left: 16px;
+  vertical-align: middle;
+}
+
+.accordion-item[open] .accordion-item-label::after {
+  /* Optionally change to plus or chevron on open */
+}
+
+.accordion-item-body {
+  padding: 0 24px 16px;
+  font-size: 14px;
+  color: #757575;
+  background: #fff;
 }
