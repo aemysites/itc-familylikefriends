@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .carousel .carousel-slides-container {
   position: relative;
 }
@@ -99,7 +100,6 @@
   z-index: 1;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .carousel .carousel-navigation-buttons button {
   position: relative;
   width: 44px;
@@ -150,4 +150,71 @@
   .carousel .carousel-slide .carousel-slide-content[data-align='justify'] {
     --slide-content-width: auto;
   }
+}
+
+
+.carousel.carousel12 {
+  background-color: #fffbe8;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Narrower red vertical stripes (approx 4px) */
+.carousel.carousel12::before,
+.carousel.carousel12::after {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #d22c2c;
+  z-index: 2;
+  border-radius: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.carousel.carousel12::before {
+  left: 0;
+}
+
+.carousel.carousel12::after {
+  right: 0;
+}
+
+/* Add pale yellow gutter between image and stripes */
+.carousel.carousel12 .carousel-slide img,
+.carousel.carousel12 img {
+  display: block;
+  width: calc(100% - 32px); /* 16px gutter each side */
+  margin-left: 16px;
+  margin-right: 16px;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Hide overlays, captions, call-to-action, navigation, and indicators */
+.carousel.carousel12 .carousel-overlay,
+.carousel.carousel12 .carousel-call-to-action,
+.carousel.carousel12 .carousel-slide-caption,
+.carousel.carousel12 .carousel-slide-content,
+.carousel.carousel12 .carousel-text-block,
+.carousel.carousel12 .carousel-button,
+.carousel.carousel12 button,
+.carousel.carousel12 [class*="button"],
+.carousel.carousel12 [class*="cta"],
+.carousel.carousel12 .carousel-navigation-buttons,
+.carousel.carousel12 .carousel-slide-indicators {
+  display: none;
+}
+
+/* Decorative sunburst if present */
+.carousel.carousel12 .carousel-background-sunburst {
+  position: absolute;
+  top: 0.5em;
+  right: 2em;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.7;
 }

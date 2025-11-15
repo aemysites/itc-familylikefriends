@@ -178,4 +178,70 @@
   font-size: 14px;
   color: #757575;
   background: #fff;
+.accordion.accordion14 {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  max-width: none;
+  margin: 0;
+  border: none;
+}
+
+.accordion.accordion14 details {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion.accordion14 .accordion-item-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  min-height: unset;
+}
+
+.accordion.accordion14 .accordion-item-label p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  white-space: normal;
+  padding: 0;
+}
+
+/* Remove divider */
+.accordion.accordion14 .accordion-item-label p + div {
+  display: none !important;
+}
+
+/* Optionally: Style the chevron for better alignment */
+.accordion.accordion14 summary {
+  list-style: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  text-align: center;
+}
+
+.accordion.accordion14 summary::-webkit-details-marker,
+.accordion.accordion14 summary::marker {
+  display: inline;
+}
+
+/* Hide the paragraph unless open (default) */
+.accordion.accordion14 .accordion-item-body {
+  display: none;
+}
+
+.accordion.accordion14 details[open] .accordion-item-body {
+  display: block;
+  margin-top: 8px;
 }
