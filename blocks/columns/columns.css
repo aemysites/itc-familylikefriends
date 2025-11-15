@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -81,7 +82,6 @@
   box-sizing: border-box;
 }
 
-/* Each column */
 .columns.columns3 .columns-2-cols div div {
   display: flex;
   flex-direction: column;
@@ -94,7 +94,6 @@
   padding: 0;
 }
 
-/* Divider */
 .columns.columns3 .columns-2-cols div div:first-child {
   border-right: 1px solid #fff3e0;
   padding-right: 16px;
@@ -104,7 +103,6 @@
   padding-left: 16px;
 }
 
-/* Responsive: stack columns and adjust divider */
 @media (width <= 600px) {
   .columns.columns3 .columns-wrapper {
     max-width: 95vw;
@@ -136,7 +134,6 @@
   }
 }
 
-/* List and link styling */
 .columns.columns3 ul {
   list-style: none;
   padding: 0;
@@ -166,4 +163,53 @@
 .columns.columns3 a:focus {
   color: #fff;
   text-decoration: underline;
+}
+
+
+.columns.columns3.block.columns-2-cols > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem; /* Space between columns */
+  position: relative;
+}
+
+.columns.columns3.block.columns-2-cols > div > div {
+  flex: 1 1 0;
+  min-width: 150px;
+}
+
+/* Vertical divider */
+.columns.columns3.block.columns-2-cols > div > div:first-child {
+  position: relative;
+}
+
+.columns.columns3.block.columns-2-cols > div > div:first-child::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1rem;
+  width: 2px;
+  height: 100%;
+  background: #FFA043; /* lighter orange */
+  border-radius: 10px;
+}
+
+/* Links styling */
+.columns.columns3.block.columns-2-cols ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns3.block.columns-2-cols li {
+  margin-bottom: 16px;
+}
+
+.columns.columns3.block.columns-2-cols a {
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
 }
