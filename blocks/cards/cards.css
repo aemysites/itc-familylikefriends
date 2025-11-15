@@ -40,7 +40,6 @@
   min-height: 400px;
 }
 
-/* Cards grid: 2 columns, 2 rows, gap between items, center inside block */
 .cards.cardsnoimages1 ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -53,7 +52,6 @@
   box-sizing: border-box;
 }
 
-/* Each card fills grid cell and stacks vertically */
 .cards.cardsnoimages1 li {
   list-style: none;
   margin: 0;
@@ -67,7 +65,6 @@
   align-items: stretch;
 }
 
-/* Card content: Cream, rounded, shadow, square, flex vertical layout */
 .cards.cardsnoimages1 .cards-card-image {
   background: #F7EBC8;
   border-radius: 1rem;
@@ -85,12 +82,10 @@
   transition: box-shadow 0.2s;
 }
 
-/* Optional subtle hover effect for lift */
 .cards.cardsnoimages1 .cards-card-image:hover {
   box-shadow: 0 4px 20px rgb(35 18 7 / 13%);
 }
 
-/* Icon/Image: Centered, sized, small bottom margin */
 .cards.cardsnoimages1 .cards-card-image picture,
 .cards.cardsnoimages1 .cards-card-image img {
   display: block;
@@ -100,13 +95,11 @@
   object-fit: contain;
 }
 
-/* Prevent image stretching if SVG color filter unsupported */
 .cards.cardsnoimages1 .cards-card-image img {
   max-width: 44px;
   max-height: 44px;
 }
 
-/* Card text: vertical stack, center, visually distinct main/sub lines */
 .cards.cardsnoimages1 .cards-card-image p {
   margin: 0.1rem 0 0;
   padding: 0;
@@ -121,13 +114,11 @@
   justify-content: center;
 }
 
-/* Make sure <br> does not add excessive spacing */
 .cards.cardsnoimages1 .cards-card-image br {
   margin: 0;
   padding: 0;
 }
 
-/* Responsive: Stack grid vertically on small screens */
 @media (width <= 700px) {
   .cards.cardsnoimages1 {
     max-width: 360px;
@@ -146,5 +137,138 @@
     min-width: 120px;
     min-height: 120px;
     padding: 1rem 0.75rem;
+  }
+}
+
+
+.cards.cards15 {
+  /* Use CSS Grid for responsive blocks, multi-row/multi-column */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 36px;
+  padding: 0;
+  background: none;
+}
+
+.cards.cards15 li {
+  /* Card itself: ensure side-by-side card bodies, fill vertical space */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 180px;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px 0 rgb(31 31 31 / 10%);
+  background: linear-gradient(to bottom, #eeecec 0, #fff 32px, #fff 100%);
+  border: none;
+  position: relative;
+  padding: 0;
+}
+
+.cards.cards15 .cards-card-body {
+  /* Reset and ensure flexible layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  min-width: 0;
+  min-height: 0;
+}
+
+.cards.cards15 .cards-card-body:first-child {
+  /* Accent area: visually empty, but reserve for pseudo accent */
+  width: 0;
+  min-width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Accent "spark": NO content property, just a shape, NO child combinator */
+.cards.cards15 .cards-card-body:first-child::before {
+  display: block;
+  position: absolute;
+  top: 22px;
+  right: -27px;
+  width: 18px;
+  height: 11px;
+  background: #FF8500;
+  border-radius: 60% 100% 100% 60% / 100% 100% 60% 60%;
+  opacity: 0.93;
+  box-shadow: 0 -2px 6px 0 rgb(255 133 0 / 14%);
+}
+
+/* Main body: horizontally and vertically center the text */
+.cards.cards15 .cards-card-body:last-child {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 180px;
+  padding: 0 38px;
+  background: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Center the heading or strong text and color it orange */
+.cards.cards15 .cards-card-body:last-child h1,
+.cards.cards15 .cards-card-body:last-child h2,
+.cards.cards15 .cards-card-body:last-child h3,
+.cards.cards15 .cards-card-body:last-child h4,
+.cards.cards15 .cards-card-body:last-child h5,
+.cards.cards15 .cards-card-body:last-child h6,
+.cards.cards15 .cards-card-body:last-child strong {
+  color: #FF8500;
+  font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  background: none;
+  padding: 0;
+  position: relative;
+}
+
+/* Hide secondary text: paragraphs/lists */
+.cards.cards15 .cards-card-body:last-child p,
+.cards.cards15 .cards-card-body:last-child ul,
+.cards.cards15 .cards-card-body:last-child ol {
+  display: none;
+}
+
+/* Responsive stacking for mobile */
+@media (width <= 600px) {
+  .cards.cards15 {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .cards.cards15 li,
+  .cards.cards15 .cards-card-body:last-child {
+    min-height: 110px;
+    padding: 0;
+  }
+
+  .cards.cards15 .cards-card-body:last-child {
+    padding: 0 16px;
+  }
+
+  .cards.cards15 .cards-card-body:first-child::before {
+    top: 12px;
+    right: -13px;
+    width: 11px;
+    height: 6px;
   }
 }
