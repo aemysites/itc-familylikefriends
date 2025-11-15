@@ -139,6 +139,45 @@
 }
 
 
+.accordion-item-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #fff;
+  cursor: pointer;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #222;
+  border: none;
+}
+
+.accordion-item-label::-webkit-details-marker, 
+.accordion-item-label::marker {
+  display: none;
+}
+
+.accordion-item-label::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: #757575;
+  border-radius: 1px;
+  margin-left: 16px;
+  vertical-align: middle;
+}
+
+.accordion-item[open] .accordion-item-label::after {
+  /* Optionally change to plus or chevron on open */
+}
+
+.accordion-item-body {
+  padding: 0 24px 16px;
+  font-size: 14px;
+  color: #757575;
+  background: #fff;
 .accordion.accordion14 {
   background: none;
   box-shadow: none;
