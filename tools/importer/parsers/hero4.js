@@ -1,44 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header row
+  // Only extract content relevant to the Hero block: image, heading, subheading, CTA.
+  // Do NOT include UI controls like the close button.
+
+  // Row 1: Block name
   const headerRow = ['Hero (hero4)'];
 
-  // 2. Extract image (background or decorative)
-  // For this popup, the main image is the SVG icon in .img_holder
-  let imageCell = '';
-  const imgHolder = element.querySelector('.img_holder img');
-  if (imgHolder) {
-    imageCell = imgHolder;
+  // Row 2: Background image (optional)
+  let imageRow = [''];
+  const img = element.querySelector('.img_holder img, img.icon-svg');
+  if (img) imageRow = [img];
+
+  // Row 3: Heading, subheading, CTA (optional)
+  const row3Content = [];
+  const heading = element.querySelector('.text_box h1, .text_box h2, .text_box h3, .text_box h4, .text_box h5, .text_box h6');
+  if (heading) row3Content.push(heading);
+  const subheading = element.querySelector('.text_box p');
+  if (subheading) row3Content.push(subheading);
+  const cta = element.querySelector('.cta_box a');
+  if (cta) {
+    const ctaClone = cta.cloneNode(true);
+    Array.from(ctaClone.querySelectorAll('img')).forEach(img => img.remove());
+    row3Content.push(ctaClone);
   }
+  // DO NOT include the close button
+  const row3 = [row3Content.length ? row3Content : ['']];
 
-  // 3. Extract text content and CTA
-  // Heading: .text_box h4
-  // Subheading: .text_box p
-  // CTA: .cta_box a
-  const textBox = element.querySelector('.text_box');
-  const ctaBox = element.querySelector('.cta_box');
-  const contentCell = [];
-
-  // Heading
-  const heading = textBox ? textBox.querySelector('h4') : null;
-  if (heading) contentCell.push(heading);
-
-  // Subheading
-  const subheading = textBox ? textBox.querySelector('p') : null;
-  if (subheading) contentCell.push(subheading);
-
-  // CTA
-  const cta = ctaBox ? ctaBox.querySelector('a') : null;
-  if (cta) contentCell.push(cta);
-
-  // 4. Build table rows
-  const rows = [
+  const cells = [
     headerRow,
-    [imageCell],
-    [contentCell],
+    imageRow,
+    row3
   ];
-
-  // 5. Create block table and replace element
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

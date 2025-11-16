@@ -1,43 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header row
+  // Header row: single cell with block name
   const headerRow = ['Accordion (accordion13)'];
-
-  // Find all accordion items (cmp-accordion__item)
-  const items = Array.from(element.querySelectorAll('.cmp-accordion__item'));
   const rows = [headerRow];
 
+  // Find all accordion items
+  const items = element.querySelectorAll('.cmp-accordion__item');
   items.forEach((item) => {
-    // Title cell: Find the button and its title span
+    // Title: get the text or span from the button
+    let title = '';
     const button = item.querySelector('button');
-    let titleCell = '';
     if (button) {
       const titleSpan = button.querySelector('.cmp-accordion__title');
-      // Use the actual DOM node for semantic preservation
-      titleCell = titleSpan ? titleSpan : button;
-    } else {
-      // Defensive fallback: get header text
-      const header = item.querySelector('.cmp-accordion__header');
-      titleCell = header ? header : '';
+      title = titleSpan ? titleSpan.textContent.trim() : button.textContent.trim();
     }
-
-    // Content cell: Find the panel
+    // Content: get the panel content (all children as a fragment)
+    let content = '';
     const panel = item.querySelector('[data-cmp-hook-accordion="panel"]');
-    let contentCell = '';
     if (panel) {
-      // Use the panel's content directly (reference, not clone)
-      contentCell = panel;
+      // Create a fragment with all children
+      const frag = document.createDocumentFragment();
+      Array.from(panel.children).forEach(child => frag.appendChild(child.cloneNode(true)));
+      content = frag;
     }
-
-    // Only add row if both cells have content
-    if (titleCell && contentCell) {
-      rows.push([titleCell, contentCell]);
-    }
+    rows.push([title, content]);
   });
 
   // Create the block table
   const block = WebImporter.DOMUtils.createTable(rows, document);
-
+  // Fix: ensure header row spans two columns (must be set on the first row's cell)
+  const firstRow = block.querySelector('tr:first-child');
+  if (firstRow && firstRow.children.length === 1) {
+    firstRow.children[0].setAttribute('colspan', '2');
+  }
   // Replace the original element
   element.replaceWith(block);
 }

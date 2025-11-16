@@ -1,78 +1,85 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Cards (cards32) block parser
+  // Cards block header row
   const headerRow = ['Cards (cards32)'];
-  const rows = [headerRow];
 
-  // Find the card container
-  const cardContainer = element.querySelector('.recipeListing_wrapper');
-  if (!cardContainer) {
-    element.replaceWith(document.createElement('div'));
-    return;
-  }
+  // Find the parent container of all cards
+  const cardsContainer = element.querySelector('.recipeListing_wrapper');
+  if (!cardsContainer) return;
 
-  // Select all card links (each card is an anchor)
-  const cardLinks = cardContainer.querySelectorAll('.recipeListing__link');
-  cardLinks.forEach((cardLink) => {
+  // Find all card links (each card is an anchor)
+  const cardLinks = Array.from(cardsContainer.querySelectorAll('.recipeListing__link'));
+
+  // Build rows for each card
+  const rows = cardLinks.map((cardLink) => {
     // Image (first cell)
-    const imgDiv = cardLink.querySelector('.card-img img');
-    let imageEl = imgDiv || null;
+    const img = cardLink.querySelector('.card-img img');
 
-    // Text content (second cell)
+    // Card content (second cell)
     const cardContent = cardLink.querySelector('.card-content');
-    const contentCell = document.createElement('div');
-    if (cardContent) {
-      // Title
-      const titleSpan = cardContent.querySelector('.card-content__top .recipeTile');
-      if (titleSpan) {
-        const titleEl = document.createElement('h3');
-        titleEl.textContent = titleSpan.textContent;
-        contentCell.appendChild(titleEl);
-      }
-      // Group rating, prep time, difficulty horizontally
-      const bottomRow = document.createElement('div');
-      bottomRow.style.display = 'flex';
-      bottomRow.style.gap = '1em';
-      bottomRow.style.alignItems = 'center';
-      // Rating (with star icon)
-      const ratingSpan = cardContent.querySelector('.card-content__top .recipeRating');
-      if (ratingSpan) {
-        const starImg = ratingSpan.querySelector('img');
-        const ratingText = ratingSpan.childNodes[ratingSpan.childNodes.length - 1].textContent.trim();
-        const ratingDiv = document.createElement('span');
-        if (starImg) {
-          ratingDiv.appendChild(starImg.cloneNode(true));
-        }
-        ratingDiv.appendChild(document.createTextNode(' ' + ratingText));
-        bottomRow.appendChild(ratingDiv);
-      }
-      // Prep time (with clock icon)
-      const prepTimeSpan = cardContent.querySelector('.card-content__bottom .recipePrepTime');
-      if (prepTimeSpan) {
-        const clockImg = prepTimeSpan.querySelector('img');
-        const prepTimeText = prepTimeSpan.childNodes[prepTimeSpan.childNodes.length - 1].textContent.trim();
-        const prepTimeDiv = document.createElement('span');
-        if (clockImg) {
-          prepTimeDiv.appendChild(clockImg.cloneNode(true));
-        }
-        prepTimeDiv.appendChild(document.createTextNode(' ' + prepTimeText));
-        bottomRow.appendChild(prepTimeDiv);
-      }
-      // Difficulty
-      const difficultySpan = cardContent.querySelector('.card-content__bottom .recipeDifficulty');
-      if (difficultySpan) {
-        const difficultyDiv = document.createElement('span');
-        difficultyDiv.textContent = difficultySpan.textContent.trim();
-        bottomRow.appendChild(difficultyDiv);
-      }
-      contentCell.appendChild(bottomRow);
+    if (!cardContent) return null;
+
+    // Title
+    const titleSpan = cardContent.querySelector('.card-content__top .recipeTile');
+    let titleEl = null;
+    if (titleSpan) {
+      titleEl = document.createElement('strong');
+      titleEl.textContent = titleSpan.textContent.trim();
     }
 
-    // Always use two columns per spec
-    rows.push([imageEl, contentCell]);
-  });
+    // Rating (with star icon)
+    const ratingSpan = cardContent.querySelector('.card-content__top .recipeRating');
+    let ratingEl = null;
+    if (ratingSpan) {
+      const starImg = ratingSpan.querySelector('img');
+      ratingEl = document.createElement('span');
+      if (starImg) {
+        ratingEl.appendChild(starImg.cloneNode(true));
+        ratingEl.appendChild(document.createTextNode(' '));
+      }
+      ratingEl.appendChild(document.createTextNode(ratingSpan.textContent.trim()));
+    }
 
-  // Create table block
-  const block = WebImporter.DOMUtils.createTable(rows, document);
+    // Prep time (with clock icon)
+    const prepTimeSpan = cardContent.querySelector('.card-content__bottom .recipePrepTime');
+    let prepTimeEl = null;
+    if (prepTimeSpan) {
+      const clockImg = prepTimeSpan.querySelector('img');
+      prepTimeEl = document.createElement('span');
+      if (clockImg) {
+        prepTimeEl.appendChild(clockImg.cloneNode(true));
+        prepTimeEl.appendChild(document.createTextNode(' '));
+      }
+      prepTimeEl.appendChild(document.createTextNode(prepTimeSpan.textContent.trim()));
+    }
+
+    // Difficulty
+    const difficultySpan = cardContent.querySelector('.card-content__bottom .recipeDifficulty');
+    let difficultyEl = null;
+    if (difficultySpan) {
+      difficultyEl = document.createElement('span');
+      difficultyEl.textContent = difficultySpan.textContent.trim();
+    }
+
+    // Compose the text cell
+    const textCell = document.createElement('div');
+    if (titleEl) textCell.appendChild(titleEl);
+    if (titleEl) textCell.appendChild(document.createElement('br'));
+    const statsDiv = document.createElement('div');
+    statsDiv.style.display = 'flex';
+    statsDiv.style.justifyContent = 'space-between';
+    statsDiv.style.gap = '1em';
+    if (prepTimeEl) statsDiv.appendChild(prepTimeEl);
+    if (difficultyEl) statsDiv.appendChild(difficultyEl);
+    if (ratingEl) statsDiv.appendChild(ratingEl);
+    textCell.appendChild(statsDiv);
+
+    // Compose row: [image, text cell]
+    return [img, textCell];
+  }).filter(Boolean);
+
+  // Compose table cells
+  const cells = [headerRow, ...rows];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

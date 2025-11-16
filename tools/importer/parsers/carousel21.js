@@ -1,50 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Carousel (carousel21) block parser
+  // Carousel (carousel21) block: 2 columns, multiple rows, first row is block name
   const headerRow = ['Carousel (carousel21)'];
   const rows = [headerRow];
 
-  // Find the carousel wrapper
+  // Find the carousel slides
   const swiperWrapper = element.querySelector('.swiper-wrapper');
   if (!swiperWrapper) return;
+  const slides = Array.from(swiperWrapper.querySelectorAll('.swiper-slide'));
 
-  // Find all slides
-  const slides = swiperWrapper.querySelectorAll('.swiper-slide');
   slides.forEach((slide) => {
-    // Find image (mandatory)
-    const img = slide.querySelector('img');
-    let imgCell = '';
-    if (img) {
-      imgCell = img;
-    } else {
-      // Defensive fallback: use alt text or slide text content
-      const altText = img ? (img.getAttribute('alt') || '') : (slide.textContent.trim() || 'Image');
-      const altSpan = document.createElement('span');
-      altSpan.textContent = altText;
-      imgCell = altSpan;
+    // Find the image (mandatory)
+    let img = slide.querySelector('img');
+    if (!img) {
+      // If no image, create a placeholder span with alt text if available
+      const alt = slide.querySelector('img')?.getAttribute('alt') || '';
+      const span = document.createElement('span');
+      span.textContent = alt ? `[${alt}]` : '(no image)';
+      img = span;
     }
-    // Second column: always present, but only filled if there is actual text content
-    let textCell = '';
-    // Look for heading or paragraph inside the slide
-    const heading = slide.querySelector('h1, h2, h3, h4, h5, h6');
-    const paragraph = slide.querySelector('p');
-    if (heading) {
-      textCell = heading.cloneNode(true);
-    } else if (paragraph) {
-      textCell = paragraph.cloneNode(true);
-    } else {
-      // Fallback: extract visible text nodes (excluding image alt text)
-      // Get all text nodes except from img
-      const textNodes = Array.from(slide.childNodes)
-        .filter(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
-      if (textNodes.length) {
-        textCell = textNodes.map(node => node.textContent.trim()).join(' ');
+
+    // Always create two columns per row: image and text (even if text is empty)
+    // Only use visible text nodes (excluding img alt) for the second cell
+    let visibleText = '';
+    function getVisibleText(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent;
       }
+      if (node.nodeType === Node.ELEMENT_NODE && !['SCRIPT', 'STYLE', 'IMG'].includes(node.tagName)) {
+        let txt = '';
+        node.childNodes.forEach(child => {
+          txt += getVisibleText(child);
+        });
+        return txt;
+      }
+      return '';
     }
-    rows.push([imgCell, textCell]);
+    visibleText = getVisibleText(slide).trim();
+
+    // If no visible text, leave second cell empty
+    rows.push([img, visibleText]);
   });
 
-  // Create block table
+  // Create the block table
   const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }

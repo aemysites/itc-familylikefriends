@@ -1,19 +1,22 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Always use the block name as the header row
+  // Embed (embedVideo18) block: expects 1 column, 2 rows
+  // Row 1: block name
+  // Row 2: image (optional), followed by video URL (required)
+
+  // Always use the block name as header
   const headerRow = ['Embed (embedVideo18)'];
 
-  // Only include visible text content (ignore hidden elements)
-  // In this HTML, all visible text is empty (h2 is empty, buttons are d-none)
-  // So, the content row should be empty
-  const contentRow = [''];
+  // Only include visible text content (not hidden by CSS)
+  // In this HTML, all buttons have class 'd-none', and the error message is empty
+  // There is no image or video URL
+  // The screenshot is blank, so output should be an empty cell
 
-  // Build the table
-  const cells = [
+  const rows = [
     headerRow,
-    contentRow,
+    [''],
   ];
 
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }
