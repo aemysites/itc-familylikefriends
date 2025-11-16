@@ -1,41 +1,81 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Cards (cards15) block for notifications
+  // Cards (cards15) block: 2 columns, multiple rows. Each card: image/icon (first cell), text (second cell)
+  // 1. Header row (must be exactly one column)
   const headerRow = ['Cards (cards15)'];
-  const rows = [headerRow];
 
-  // Find the heading element containing the text and accent
+  // 2. Extract the heading text ('Notifications') from the cmp-text section
+  let headingText = '';
   const headingEl = element.querySelector('.cmp-text h2');
   if (headingEl) {
-    // Use a blank span for the icon cell since the screenshot has no icon
-    const blankIcon = document.createElement('span');
-    // Clone the heading node to preserve styling and accents (including accent mark)
-    rows.push([blankIcon, headingEl.cloneNode(true)]);
+    headingText = headingEl.textContent.trim();
   }
 
-  // Find all notification-wrapper elements and add each as a card row
-  const notifications = element.querySelectorAll('.notification-wrapper');
-  notifications.forEach((notif) => {
-    const blankIcon = document.createElement('span');
-    const title = notif.getAttribute('data-title');
-    const subtitle = notif.getAttribute('data-subtitle');
-    const textCell = document.createElement('div');
-    if (title) {
-      const titleEl = document.createElement('strong');
-      titleEl.textContent = title.trim();
-      textCell.appendChild(titleEl);
-    }
-    if (subtitle) {
-      textCell.appendChild(document.createElement('br'));
-      const subtitleEl = document.createElement('span');
-      subtitleEl.textContent = subtitle.trim();
-      textCell.appendChild(subtitleEl);
-    }
-    rows.push([blankIcon, textCell]);
-  });
+  // 3. Compose heading row as a card (first cell: accent/icon, second cell: heading text)
+  let rows = [];
+  if (headingText) {
+    // Create accent/icon for the first cell
+    const accent = document.createElement('span');
+    accent.textContent = '✦'; // Decorative accent placeholder
+    accent.style.color = '#bb1f3b';
+    accent.style.fontWeight = 'bold';
+    accent.style.fontSize = '1.5em';
+    accent.style.display = 'inline-block';
+    accent.style.marginRight = '8px';
+    accent.setAttribute('aria-hidden', 'true');
 
-  // Create the table block
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  // Replace the original element
+    // Compose heading cell
+    const headingCell = document.createElement('div');
+    const strong = document.createElement('strong');
+    strong.textContent = headingText;
+    strong.style.color = '#bb1f3b';
+    headingCell.appendChild(strong);
+    rows.push([accent, headingCell]);
+  }
+
+  // 4. Find the card container and notification cards
+  const notificationsContainer = element.querySelector('.notifications-container');
+  if (notificationsContainer) {
+    const notificationList = notificationsContainer.querySelector('.notification-list');
+    if (notificationList) {
+      // Find all notification-wrapper elements (each is a card)
+      const wrappers = Array.from(notificationList.querySelectorAll('.notification-wrapper'));
+      wrappers.forEach((wrapper) => {
+        // Each card: first cell is icon/image (none in source), so use a generic icon
+        // Text cell: Title (data-title), Description (data-subtitle)
+        const titleText = wrapper.getAttribute('data-title') || '';
+        const subtitleText = wrapper.getAttribute('data-subtitle') || '';
+
+        // Compose text cell
+        const textCell = document.createElement('div');
+        if (titleText) {
+          const title = document.createElement('strong');
+          title.textContent = titleText;
+          textCell.appendChild(title);
+        }
+        if (subtitleText) {
+          const desc = document.createElement('div');
+          desc.textContent = subtitleText;
+          textCell.appendChild(desc);
+        }
+
+        // Use a generic notification icon for first cell
+        const icon = document.createElement('span');
+        icon.textContent = '🔔';
+        icon.setAttribute('aria-label', 'notification');
+        icon.style.fontSize = '1.5em';
+        icon.style.display = 'inline-block';
+        icon.style.marginRight = '8px';
+
+        rows.push([icon, textCell]);
+      });
+    }
+  }
+
+  // 5. Compose table: header row and all cards
+  const tableData = [headerRow, ...rows];
+
+  // 6. Replace original element
+  const block = WebImporter.DOMUtils.createTable(tableData, document);
   element.replaceWith(block);
 }

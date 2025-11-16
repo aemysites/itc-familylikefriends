@@ -1,28 +1,30 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header row
+  // Table header row for Hero (hero9)
   const headerRow = ['Hero (hero9)'];
 
-  // There is no image in this block (row 2 is empty)
+  // Row 2: Background image (none in this case)
   const imageRow = [''];
 
-  // Row 3: Collect all text content (including headings, paragraphs, etc.)
-  // More flexible: get all direct <h2>, <h1>, <h3>, <p> inside the block
-  const textContentElements = Array.from(element.querySelectorAll('h1, h2, h3, h4, h5, h6, p'));
-  let textRowContent;
-  if (textContentElements.length > 0) {
-    // If there's only one, use it directly; if more, wrap in a fragment
-    if (textContentElements.length === 1) {
-      textRowContent = textContentElements[0];
-    } else {
-      const fragment = document.createElement('div');
-      textContentElements.forEach(el => fragment.appendChild(el.cloneNode(true)));
-      textRowContent = fragment;
-    }
-  } else {
-    textRowContent = '';
+  // Row 3: Only the main headline, as in the screenshot (no duplication, no extraneous elements)
+  // Find the h2 inside .cmp-text (the actual headline)
+  let headline = element.querySelector('.cmp-text h2');
+  if (!headline) {
+    // fallback: any h2 in the block
+    headline = element.querySelector('h2');
   }
-  const textRow = [textRowContent];
+  let textCellContent;
+  if (headline) {
+    // clone the headline to preserve styling (e.g., colored span)
+    textCellContent = headline.cloneNode(true);
+  } else {
+    // fallback: just use all text content
+    const fallbackDiv = document.createElement('div');
+    fallbackDiv.textContent = element.textContent.trim();
+    textCellContent = fallbackDiv;
+  }
+
+  const textRow = [textCellContent];
 
   // Build the table
   const cells = [
@@ -32,5 +34,7 @@ export default function parse(element, { document }) {
   ];
 
   const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace the original element with the new block
   element.replaceWith(block);
 }

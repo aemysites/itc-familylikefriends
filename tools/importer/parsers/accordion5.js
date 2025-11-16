@@ -1,52 +1,40 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion (accordion5) block parser
-  // Header row as per guidelines
+  // Accordion block header row
   const headerRow = ['Accordion (accordion5)'];
 
-  // Defensive: Find the accordion header/title
-  let titleEl = null;
-  // Look for a button inside h3 (common pattern)
-  const header = element.querySelector('.cmp-accordion__header');
-  if (header) {
-    const button = header.querySelector('button');
-    if (button) {
-      // The title is usually inside a span
-      titleEl = button.querySelector('.cmp-accordion__title') || button;
+  // Defensive: find the button that acts as the accordion header
+  const button = element.querySelector('button');
+  let titleCell = '';
+  if (button) {
+    // The title is inside a span with class 'cmp-accordion__title'
+    const titleSpan = button.querySelector('.cmp-accordion__title');
+    if (titleSpan) {
+      titleCell = titleSpan;
+    } else {
+      // fallback: use button text
+      titleCell = document.createTextNode(button.textContent.trim());
     }
   }
-  // Fallback: Try to find any button
-  if (!titleEl) {
-    const btn = element.querySelector('button');
-    if (btn) titleEl = btn;
-  }
 
-  // Defensive: Find the accordion content panel
-  let contentEl = null;
-  // Panel is usually marked with data-cmp-hook-accordion="panel"
+  // Defensive: find the panel that contains the content
+  let contentCell = '';
   const panel = element.querySelector('[data-cmp-hook-accordion="panel"]');
   if (panel) {
-    // Use the panel's content directly (preserves structure)
-    contentEl = panel;
+    // Use the panel's content (could be a div.text or similar)
+    // We'll reference the whole panel for resilience
+    contentCell = panel;
   }
 
-  // Fallback: Try to find any div with class 'cmp-accordion__panel'
-  if (!contentEl) {
-    const fallbackPanel = element.querySelector('.cmp-accordion__panel');
-    if (fallbackPanel) contentEl = fallbackPanel;
-  }
+  // Build table rows: first row is header, second row is [title, content]
+  const rows = [
+    headerRow,
+    [titleCell, contentCell]
+  ];
 
-  // Compose the rows for the block table
-  const rows = [headerRow];
-
-  // Only add the item row if we have a title and content
-  if (titleEl && contentEl) {
-    rows.push([titleEl, contentEl]);
-  }
-
-  // Create the block table
+  // Create the table block
   const block = WebImporter.DOMUtils.createTable(rows, document);
 
-  // Replace the original element with the block table
+  // Replace the original element with the block
   element.replaceWith(block);
 }

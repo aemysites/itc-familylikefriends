@@ -1,86 +1,87 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Always start with the correct header row
+  // Compose header row
   const headerRow = ['Carousel (carousel12)'];
+  const rows = [headerRow];
 
-  // Extract the carousel heading and subheading
-  const headingSection = element.querySelector('.famlf-carousel-text');
-  let headingContent = '';
-  if (headingSection) {
-    headingContent = Array.from(headingSection.children)
-      .map((child) => child.textContent.trim())
-      .filter(Boolean)
-      .join('<br>');
+  // --- Extract all text content from the original HTML ---
+  // 1. Hero/Header section: headline and subheading
+  const headerTextSection = element.querySelector('.cmp-text');
+  const allTextFragments = [];
+  if (headerTextSection) {
+    // Headline (h2)
+    const headline = headerTextSection.querySelector('h2');
+    if (headline) allTextFragments.push(headline);
+    // Subheadings (all paragraphs)
+    headerTextSection.querySelectorAll('p').forEach(p => allTextFragments.push(p));
+  }
+  // 2. CTA (GIVE IT A GO)
+  const cta = element.querySelector('.famlf-carousel-cta, .famlf-cta-btn, a.cmp-button__text');
+  if (cta) allTextFragments.push(cta);
+
+  // Find the carousel slides wrapper
+  const slidesWrapper = element.querySelector('.swiper-wrapper');
+  if (!slidesWrapper) {
+    // No slides: just output header row
+    const block = WebImporter.DOMUtils.createTable(rows, document);
+    element.replaceWith(block);
+    return;
   }
 
-  // Find the swiper section containing slides
-  const swiperSection = element.querySelector('.swiper');
-  let rows = [];
-  if (swiperSection) {
-    const wrapper = swiperSection.querySelector('.swiper-wrapper');
-    if (wrapper) {
-      const slides = Array.from(wrapper.children).filter(
-        (el) => el.classList.contains('swiper-slide')
-      );
-      for (const slide of slides) {
-        // Find image (first cell)
-        const img = slide.querySelector('img');
-        if (!img) continue;
+  // Get all slides
+  const slideDivs = Array.from(slidesWrapper.querySelectorAll(':scope > div.swiper-slide'));
+  if (!slideDivs.length) {
+    const block = WebImporter.DOMUtils.createTable(rows, document);
+    element.replaceWith(block);
+    return;
+  }
 
-        // Find text content (second cell)
-        let textCell = document.createElement('div');
-        // Extract card title and subtitle from slide's banner-section
-        const card = slide.querySelector('.banner-section');
-        let cardTitle = '';
-        let cardSubtitle = '';
-        if (card) {
-          // Try to find the card title (look for .banner-section > div > div > strong, b, h1, h2, h3)
-          // The actual title/subtitle may be in nested divs, so search all descendants
-          const titleEl = Array.from(card.querySelectorAll('*')).find(
-            (el) => el.textContent.trim() &&
-              (/reliving priceless moments/i).test(el.textContent.trim())
-          );
-          if (titleEl) {
-            cardTitle = titleEl.textContent.trim();
-            const heading = document.createElement('h2');
-            heading.textContent = cardTitle;
-            textCell.appendChild(heading);
-          }
-          // Try to find the card subtitle (Submitted by ...)
-          const subtitleEl = Array.from(card.querySelectorAll('*')).find(
-            (el) => el.textContent.trim().toLowerCase().startsWith('submitted by')
-          );
-          if (subtitleEl) {
-            cardSubtitle = subtitleEl.textContent.trim();
-            const sub = document.createElement('p');
-            sub.textContent = cardSubtitle;
-            textCell.appendChild(sub);
-          }
-        }
-        // Add CTA if present in the block
-        const ctaSection = element.querySelector('.text-center');
-        if (ctaSection) {
-          const cta = ctaSection.querySelector('a');
-          if (cta) {
-            const ctaLink = document.createElement('a');
-            ctaLink.href = cta.href;
-            ctaLink.textContent = cta.textContent.trim();
-            textCell.appendChild(ctaLink);
-          }
-        }
-        // Add heading/subheading to the first slide only
-        if (rows.length === 0 && headingContent) {
-          const headingDiv = document.createElement('div');
-          headingDiv.innerHTML = headingContent;
-          textCell.prepend(headingDiv);
-        }
-        rows.push([img, textCell]);
+  slideDivs.forEach((slide) => {
+    // First cell: image (mandatory)
+    let img = slide.querySelector('img');
+    let imgCell = img ? img : '';
+
+    // Second cell: text content (must include all text from the slide)
+    const textCellFragments = [];
+
+    // Heading (h2/h3/h4, .banner-title, .cmp-title)
+    const heading = slide.querySelector('h2, h3, h4, .banner-title, .cmp-title');
+    if (heading) textCellFragments.push(heading);
+
+    // All paragraphs
+    Array.from(slide.querySelectorAll('p')).forEach(p => {
+      textCellFragments.push(p);
+    });
+
+    // Any spans/divs with 'Submitted by'
+    Array.from(slide.querySelectorAll('span, div')).forEach(e => {
+      if (/Submitted by/i.test(e.textContent)) textCellFragments.push(e);
+    });
+
+    // Decorative icons (e.g., emoji, sunburst) if present
+    Array.from(slide.querySelectorAll('svg, img.icon, .icon, .emoji')).forEach(icon => {
+      textCellFragments.push(icon);
+    });
+
+    // If nothing found, leave cell blank
+    let textCell = textCellFragments.length ? textCellFragments : '';
+
+    // --- Add ALL text content from the original HTML to the slide's text cell ---
+    // This ensures all text from the source HTML is included in the output
+    if (allTextFragments.length) {
+      if (Array.isArray(textCell)) {
+        textCell = [...allTextFragments, ...textCell];
+      } else if (textCell) {
+        textCell = [...allTextFragments, textCell];
+      } else {
+        textCell = allTextFragments;
       }
     }
-  }
 
-  // Compose table data
-  const tableData = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(tableData, document);
+    rows.push([imgCell, textCell]);
+  });
+
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }

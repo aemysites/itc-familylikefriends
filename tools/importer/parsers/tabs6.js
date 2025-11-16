@@ -1,39 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper: Get all tab labels and corresponding panels
+  // Find the tabs root container
   const tabsRoot = element.querySelector('.cmp-tabs');
   if (!tabsRoot) return;
 
-  // Tab labels (li elements inside ol[role="tablist"])
-  const tabLabels = Array.from(tabsRoot.querySelectorAll('ol[role="tablist"] > li[role="tab"]'));
-  // Tab panels (div[role="tabpanel"] inside tabsRoot)
+  // Find tab labels (li[role="tab"])
+  const tabList = tabsRoot.querySelector('.cmp-tabs__tablist');
+  if (!tabList) return;
+  const tabLabels = Array.from(tabList.querySelectorAll('li[role="tab"]'));
+
+  // Find corresponding tab panels (div[role="tabpanel"])
   const tabPanels = Array.from(tabsRoot.querySelectorAll('div[role="tabpanel"]'));
 
-  // Defensive: Only process if we have at least one tab label and panel
-  if (!tabLabels.length || !tabPanels.length) return;
+  // Defensive: Ensure we have matching labels and panels
+  if (tabLabels.length !== tabPanels.length || tabLabels.length === 0) return;
 
-  // Build rows for each tab
-  const rows = tabLabels.map((tabLabel, idx) => {
-    // Find the corresponding panel by aria-controls/id
-    const panelId = tabLabel.getAttribute('aria-controls');
-    const panel = tabPanels.find(p => p.id === panelId);
-    // Defensive: If no panel found, use empty string
-    let tabContent = '';
-    if (panel) {
-      // Use the entire panel element as tab content (preserves structure)
-      tabContent = panel;
-    }
-    // Each row: [Tab Label, Tab Content]
-    return [tabLabel.textContent.trim(), tabContent];
+  // Table header must match block name exactly
+  const headerRow = ['Tabs (tabs6)'];
+  const rows = [headerRow];
+
+  // For each tab, add a row: [label, content]
+  tabLabels.forEach((labelEl, idx) => {
+    // Tab label (text only, dynamic)
+    const tabLabel = labelEl.textContent.trim();
+    // Tab content: reference the panel element directly
+    const tabPanel = tabPanels[idx];
+    // Defensive: If panel is missing, skip
+    if (!tabPanel) return;
+    rows.push([tabLabel, tabPanel]);
   });
 
-  // Table header row
-  const headerRow = ['Tabs (tabs6)'];
-  const cells = [headerRow, ...rows];
-
-  // Create block table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace original element
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }

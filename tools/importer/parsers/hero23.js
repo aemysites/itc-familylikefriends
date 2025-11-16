@@ -1,42 +1,33 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Extract main image (SVG or IMG)
+  // Helper: Find the main image (SVG icon)
   const imgHolder = element.querySelector('.img_holder img');
-  let mainImage = imgHolder || '';
+  // Defensive: fallback if not found
+  const heroImage = imgHolder || '';
 
-  // 2. Extract heading and subheading
-  const textBox = element.querySelector('.text_box');
-  let heading = '', subheading = '';
-  if (textBox) {
-    const h = textBox.querySelector('h4');
-    if (h) heading = h;
-    const p = textBox.querySelector('p');
-    if (p) subheading = p;
-  }
+  // Helper: Find the heading (h4)
+  const heading = element.querySelector('.text_box h4');
+  // Helper: Find the subheading (paragraph)
+  const subheading = element.querySelector('.text_box p');
 
-  // 3. Extract CTA link (with text and icon)
-  const ctaBox = element.querySelector('.cta_box');
-  let cta = '';
-  if (ctaBox) {
-    const a = ctaBox.querySelector('a');
-    if (a) cta = a;
-  }
+  // Helper: Find the CTA (anchor)
+  const cta = element.querySelector('.cta_box a');
 
-  // 4. Compose table rows
-  const headerRow = ['Hero (hero23)']; // CRITICAL: Must match block name exactly
-  const imageRow = [mainImage]; // Reference image element directly
-  // Content row: heading, subheading, CTA (all referenced elements, not text)
-  const contentRow = [
-    [heading, subheading, cta].filter(Boolean)
-  ];
+  // Build table rows
+  const headerRow = ['Hero (hero23)'];
+  const imageRow = [heroImage ? heroImage : ''];
 
-  // 5. Build the table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    imageRow,
-    contentRow
-  ], document);
+  // Compose content row
+  const content = [];
+  if (heading) content.push(heading);
+  if (subheading) content.push(subheading);
+  if (cta) content.push(cta);
+  const contentRow = [content];
 
-  // 6. Replace original element
-  element.replaceWith(table);
+  // Build table
+  const cells = [headerRow, imageRow, contentRow];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace original element
+  element.replaceWith(block);
 }

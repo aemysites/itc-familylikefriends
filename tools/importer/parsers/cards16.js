@@ -1,64 +1,47 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Cards (cards16) block: extract image, overlay text, title, description
+  // Cards (cards16) block: 2 columns, first row is header, each card = row
   const headerRow = ['Cards (cards16)'];
   const rows = [headerRow];
 
-  // Find the card container (in this HTML, it's the <a> inside .banner-section)
-  const cardLink = element.querySelector('.banner-section > a');
+  // Find the card link container
+  const cardLink = element.querySelector('a.text-decoration-none');
   if (!cardLink) return;
 
-  // Image: inside .cardImageContainer
+  // --- Image cell ---
+  // Find the image inside the card
   const imgContainer = cardLink.querySelector('.cardImageContainer');
-  let imageEl = null;
+  let imgEl = null;
   if (imgContainer) {
-    imageEl = imgContainer.querySelector('img');
+    imgEl = imgContainer.querySelector('img');
   }
 
-  // Overlay text: try to extract from alt attribute if present, else hardcode from screenshot analysis
-  let overlayText = '';
-  if (imageEl && imageEl.alt) {
-    overlayText = imageEl.alt.trim();
-  }
-  // If the alt is not the overlay, use the screenshot overlay text
-  if (!overlayText || overlayText === 'Birthday Games') {
-    overlayText = '10 FUN EXCITING PARTY GAMES FOR CELEBRATING WITH FAMILY';
-  }
-
-  // Card content: overlay text, title, description
-  const contentContainer = cardLink.querySelector('.cardContent');
-  const textContent = document.createElement('div');
-  textContent.style.display = 'flex';
-  textContent.style.flexDirection = 'column';
-
-  // Add overlay text if present
-  if (overlayText) {
-    const overlayDiv = document.createElement('div');
-    overlayDiv.textContent = overlayText;
-    textContent.appendChild(overlayDiv);
-  }
-
-  if (contentContainer) {
-    // Title
-    const titleEl = contentContainer.querySelector('.cardTitle');
-    if (titleEl) {
-      textContent.appendChild(titleEl);
+  // --- Text cell ---
+  // Find the content container
+  const cardContent = cardLink.querySelector('.cardContent');
+  let textCellContent = [];
+  if (cardContent) {
+    // Title (h2)
+    const titleEl = cardContent.querySelector('.cardTitle');
+    if (titleEl) textCellContent.push(titleEl);
+    // Description (p)
+    const descEl = cardContent.querySelector('.cardDescription');
+    if (descEl) textCellContent.push(descEl);
+    // CTA (button or link)
+    // In this example, the button is present but has no visible text, so skip if empty
+    const ctaBtn = cardContent.querySelector('.cardCta');
+    if (ctaBtn && ctaBtn.textContent.trim()) {
+      textCellContent.push(ctaBtn);
     }
-    // Description
-    const descEl = contentContainer.querySelector('.cardDescription');
-    if (descEl) {
-      textContent.appendChild(descEl);
-    }
-    // DO NOT add CTA, as there is no visible CTA text in the HTML or screenshot
   }
 
-  // Build the card row: [image, text content]
+  // Compose the card row
   rows.push([
-    imageEl || '',
-    textContent.childNodes.length ? textContent : ''
+    imgEl || '',
+    textCellContent.length > 0 ? textCellContent : ''
   ]);
 
-  // Create the table and replace the element
+  // Create and replace
   const table = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(table);
 }

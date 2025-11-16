@@ -13,14 +13,12 @@
 /* eslint-disable no-console */
 import cardsNoImages1Parser from './parsers/cardsNoImages1.js';
 import cards2Parser from './parsers/cards2.js';
-import hero4Parser from './parsers/hero4.js';
 import accordion5Parser from './parsers/accordion5.js';
-import tabs6Parser from './parsers/tabs6.js';
+import hero4Parser from './parsers/hero4.js';
 import columns3Parser from './parsers/columns3.js';
+import tabs6Parser from './parsers/tabs6.js';
 import hero9Parser from './parsers/hero9.js';
-import hero8Parser from './parsers/hero8.js';
 import columns11Parser from './parsers/columns11.js';
-import hero7Parser from './parsers/hero7.js';
 import accordion13Parser from './parsers/accordion13.js';
 import accordion14Parser from './parsers/accordion14.js';
 import carousel12Parser from './parsers/carousel12.js';
@@ -28,14 +26,14 @@ import cards16Parser from './parsers/cards16.js';
 import embedVideo18Parser from './parsers/embedVideo18.js';
 import cards15Parser from './parsers/cards15.js';
 import hero23Parser from './parsers/hero23.js';
-import carousel21Parser from './parsers/carousel21.js';
 import accordion25Parser from './parsers/accordion25.js';
+import carousel21Parser from './parsers/carousel21.js';
 import accordion26Parser from './parsers/accordion26.js';
 import cards17Parser from './parsers/cards17.js';
-import accordion28Parser from './parsers/accordion28.js';
 import accordion31Parser from './parsers/accordion31.js';
 import hero29Parser from './parsers/hero29.js';
 import cards32Parser from './parsers/cards32.js';
+import accordion28Parser from './parsers/accordion28.js';
 import headerParser from './parsers/header.js';
 import metadataParser from './parsers/metadata.js';
 import cleanupTransformer from './transformers/cleanup.js';
@@ -54,14 +52,12 @@ const parsers = {
   metadata: metadataParser,
   cardsNoImages1: cardsNoImages1Parser,
   cards2: cards2Parser,
-  hero4: hero4Parser,
   accordion5: accordion5Parser,
-  tabs6: tabs6Parser,
+  hero4: hero4Parser,
   columns3: columns3Parser,
+  tabs6: tabs6Parser,
   hero9: hero9Parser,
-  hero8: hero8Parser,
   columns11: columns11Parser,
-  hero7: hero7Parser,
   accordion13: accordion13Parser,
   accordion14: accordion14Parser,
   carousel12: carousel12Parser,
@@ -69,14 +65,14 @@ const parsers = {
   embedVideo18: embedVideo18Parser,
   cards15: cards15Parser,
   hero23: hero23Parser,
-  carousel21: carousel21Parser,
   accordion25: accordion25Parser,
+  carousel21: carousel21Parser,
   accordion26: accordion26Parser,
   cards17: cards17Parser,
-  accordion28: accordion28Parser,
   accordion31: accordion31Parser,
   hero29: hero29Parser,
   cards32: cards32Parser,
+  accordion28: accordion28Parser,
   ...customParsers,
 };
 

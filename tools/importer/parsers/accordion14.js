@@ -1,37 +1,39 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row: single column with block name
+  // Header row: single cell with block name
   const headerRow = ['Accordion (accordion14)'];
 
-  // Extract plain text title from the accordion header
-  let titleText = '';
+  // Extract title from button > .cmp-accordion__title
+  let title = '';
   const button = element.querySelector('button');
   if (button) {
     const titleSpan = button.querySelector('.cmp-accordion__title');
     if (titleSpan) {
-      titleText = titleSpan.textContent.trim();
+      title = titleSpan.textContent.trim();
     }
   }
 
-  // Extract only the paragraph content from the accordion panel
-  let contentText = '';
-  const panel = element.querySelector('[data-cmp-hook-accordion="panel"]');
+  // Extract content from .cmp-accordion__panel
+  let content = '';
+  const panel = element.querySelector('.cmp-accordion__panel');
   if (panel) {
-    const p = panel.querySelector('p');
-    if (p) {
-      contentText = p.textContent.trim();
+    // Get all text content from all paragraphs inside the panel
+    const paragraphs = Array.from(panel.querySelectorAll('p'));
+    if (paragraphs.length) {
+      content = paragraphs.map(p => p.textContent.trim()).join(' ');
+    } else {
+      content = panel.textContent.trim();
     }
   }
 
-  // Build rows: header, then [title, content] as plain text
-  const rows = [
-    headerRow,
-    [titleText, contentText]
-  ];
+  // Compose table rows: header as single cell, then 2-column data row
+  const cells = [];
+  cells.push(headerRow); // single cell header row
+  cells.push([title, content]); // 2-column data row
 
-  // Create the table block
-  const block = WebImporter.DOMUtils.createTable(rows, document);
+  // Create table block
+  const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Replace the original element with the block
+  // Replace original element
   element.replaceWith(block);
 }

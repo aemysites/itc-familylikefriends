@@ -1,54 +1,33 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header row: always block name
+  // 1. Header row: Use exact block name
   const headerRow = ['Hero (hero29)'];
 
-  // 2. Extract image (background image for hero)
-  let imageEl = element.querySelector('img');
-  const imageCell = imageEl ? imageEl : '';
+  // 2. Image row: Reference the actual image element
+  const img = element.querySelector('img');
+  const imageRow = [img ? img : ''];
 
-  // 3. Extract all text content from the source html, omitting empty headings
-  let textContainer = element.querySelector('.cmp-text');
-  let textCellContent = [];
-  if (textContainer) {
-    // Get all h1 elements (headline)
-    const h1s = textContainer.querySelectorAll('h1');
-    h1s.forEach(h1 => {
-      // Remove <a> wrappers but keep their content
-      let h1Clone = h1.cloneNode(true);
-      h1Clone.querySelectorAll('a').forEach(a => {
-        const parent = a.parentNode;
-        while (a.firstChild) parent.insertBefore(a.firstChild, a);
-        parent.removeChild(a);
-      });
-      // Only include non-empty headings
-      if (h1Clone.textContent && h1Clone.textContent.trim() !== '\u00A0' && h1Clone.textContent.trim() !== '') {
-        textCellContent.push(h1Clone);
-      }
-    });
-    // Add all paragraphs
-    textContainer.querySelectorAll('p').forEach(p => textCellContent.push(p.cloneNode(true)));
-    // Add any CTA links (if present)
-    textContainer.querySelectorAll('a[href]').forEach(a => {
-      if (!textCellContent.includes(a)) {
-        textCellContent.push(a.cloneNode(true));
+  // 3. Content row: Only include non-empty headings from cmp-text
+  const cmpText = element.querySelector('.cmp-text');
+  let contentFragment = document.createDocumentFragment();
+  if (cmpText) {
+    Array.from(cmpText.children).forEach(node => {
+      if (node.textContent && node.textContent.trim()) {
+        contentFragment.appendChild(node.cloneNode(true));
       }
     });
   }
 
-  // Add overlay text from screenshot analysis (visually prominent, must be included)
-  const overlayText = document.createElement('h2');
-  overlayText.textContent = '10 FUN EXCITING PARTY GAMES FOR CELEBRATING WITH FAMILY';
-  textCellContent.push(overlayText);
-
-  const textCell = textCellContent.length ? textCellContent : '';
-
-  const rows = [
+  // 4. Compose table rows
+  const cells = [
     headerRow,
-    [imageCell],
-    [textCell]
+    imageRow,
+    [contentFragment.hasChildNodes() ? contentFragment : '']
   ];
 
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  // 5. Create table using WebImporter.DOMUtils.createTable
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // 6. Replace element with new table
+  element.replaceWith(table);
 }
