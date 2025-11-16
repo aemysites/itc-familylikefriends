@@ -60,3 +60,37 @@
   top: 4px;
   left: 7px;
 }
+
+
+.embed.embedvideo18 {
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  min-height: 1px;
+  display: block;
+}
+
+/* Ensure any nested divs inside embedvideo18 also do not interfere with blank layout */
+.embed.embedvideo18 div {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  display: block;
+}
+
+/* Remove any accidental spacing or layout from deeply nested empty divs */
+.embed.embedvideo18 div div {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
