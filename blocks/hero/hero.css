@@ -122,23 +122,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* Center text horizontally */
+  align-items: center;
 }
 
 .hero h2 {
-  font-family: Inter, Arial, Helvetica, sans-serif; /* or another modern sans-serif */
-  font-size: 1.25rem; /* ~16-20px medium size */
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
   font-weight: 400;
-  color: #181818; /* Black for most of the text */
+  color: #181818;
   margin: 0;
   padding: 0;
   text-align: center;
   letter-spacing: 0;
   line-height: 1.2;
-  margin-top: 0.5em; /* Slight vertical spacing */
+  margin-top: 0.5em;
 }
 
-/* Responsive: stack columns vertically on mobile */
 @media (width <= 700px) {
   .hero {
     flex-direction: column;
@@ -148,4 +147,31 @@
   .hero > div {
     width: 100%;
   }
+}
+
+
+.hero.hero23 {
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 1px;
+  display: block;
+}
+
+.hero.hero23 div,
+.hero.hero23 img,
+.hero.hero23 picture,
+.hero.hero23 h1,
+.hero.hero23 h2,
+.hero.hero23 h3,
+.hero.hero23 h4,
+.hero.hero23 h5,
+.hero.hero23 h6,
+.hero.hero23 p,
+.hero.hero23 a,
+.hero.hero23 button {
+  display: none;
 }
