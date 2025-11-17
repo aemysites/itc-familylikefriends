@@ -1,0 +1,41 @@
+{
+  "variantName": "hero-adoption",
+  "baseBlock": "hero",
+  "isParentBlock": false,
+  "parentBlockType": null,
+  "version": "1.0.0",
+  "created": "2025-11-17T07:46:30.000Z",
+  "sourceContext": {
+    "originUrl": "https://familylikefriends.com/adopt-with-love.html",
+    "originPage": "adoption awareness page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "standard",
+    "purpose": "adoption-hero",
+    "imagePattern": "single"
+  },
+  "contentPattern": {
+    "structure": "heading + subheading + image",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "adoption awareness pages",
+      "social cause landing pages",
+      "informational campaign pages"
+    ],
+    "notSuitableFor": [
+      "product pages",
+      "e-commerce pages",
+      "blog posts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/adopt-with-love"],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17T07:46:30.000Z"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "variantName": "hero-poster",
+  "baseBlock": "hero",
+  "isParentBlock": false,
+  "parentBlockType": null,
+  "version": "1.0.0",
+  "created": "2025-11-17T07:20:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://familylikefriends.com/filmy-faces.html",
+    "originPage": "Filmy Faces landing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "orange",
+    "density": "spacious",
+    "purpose": "poster-creation",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + description + CTA + poster image",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "creative tool landing pages",
+      "poster/image creation features",
+      "promotional hero sections with large visuals"
+    ],
+    "notSuitableFor": [
+      "text-only hero sections",
+      "minimal hero sections without images"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/filmy-faces"],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17T07:20:00.000Z"
+  }
+}

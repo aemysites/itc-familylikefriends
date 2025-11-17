@@ -1,0 +1,41 @@
+{
+  "variantName": "cards-stats",
+  "baseBlock": "cards",
+  "isParentBlock": false,
+  "parentBlockType": null,
+  "version": "1.0.0",
+  "created": "2025-11-17T07:46:30.000Z",
+  "sourceContext": {
+    "originUrl": "https://familylikefriends.com/adopt-with-love.html",
+    "originPage": "adoption awareness page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "statistics-display",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "number + descriptive text",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "statistics displays",
+      "metric showcases",
+      "data highlights without images"
+    ],
+    "notSuitableFor": [
+      "product cards with images",
+      "team member profiles",
+      "article previews"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/adopt-with-love"],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17T07:46:30.000Z"
+  }
+}

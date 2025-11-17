@@ -1,0 +1,85 @@
+/* Recipe tabs container */
+.parent-tabs-recipe {
+  padding: 0;
+}
+
+.parent-tabs-recipe .parent-tabs-recipe-list {
+  display: flex;
+  gap: 0;
+  max-width: 100%;
+  padding: 0 0 32px;
+  font-size: 16px;
+  overflow-x: auto;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  border-bottom: none;
+}
+
+/* Tab buttons - pill shaped with cream border */
+.parent-tabs-recipe .parent-tabs-recipe-list button {
+  flex: 0 0 auto;
+  margin: 0;
+  margin-right: 8px;
+  border: 1px solid var(--recipe-border);
+  border-radius: 100px;
+  padding: 8px 20px;
+  background-color: transparent;
+  color: var(--recipe-cream);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.parent-tabs-recipe .parent-tabs-recipe-list button p {
+  margin: 0;
+}
+
+.parent-tabs-recipe .parent-tabs-recipe-list button:hover {
+  background-color: rgba(249, 238, 196, 0.1);
+}
+
+/* Selected tab state - same styling as default for this design */
+.parent-tabs-recipe .parent-tabs-recipe-list button[aria-selected='true'] {
+  border: 1px solid var(--recipe-border);
+  background-color: transparent;
+  color: var(--recipe-cream);
+  font-weight: 500;
+  cursor: default;
+}
+
+/* Tab panel containing cards */
+.parent-tabs-recipe .parent-tabs-recipe-panel {
+  margin-top: 0;
+  padding: 0;
+  border: none;
+  overflow: visible;
+}
+
+/* Hide the heading inside tab panels (it's already shown in the tab button) */
+.parent-tabs-recipe .parent-tabs-recipe-panel .default-content-wrapper > h2,
+.parent-tabs-recipe .parent-tabs-recipe-panel .default-content-wrapper > h3,
+.parent-tabs-recipe .parent-tabs-recipe-panel .default-content-wrapper > h4 {
+  display: none;
+}
+
+.parent-tabs-recipe .parent-tabs-recipe-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (width >= 600px) {
+  .parent-tabs-recipe .parent-tabs-recipe-list {
+    font-size: 16px;
+  }
+}
+
+@media (width >= 900px) {
+  .parent-tabs-recipe .parent-tabs-recipe-list {
+    font-size: 16px;
+  }
+}

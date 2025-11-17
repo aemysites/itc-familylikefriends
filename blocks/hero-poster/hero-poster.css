@@ -1,0 +1,63 @@
+.hero-poster-container .hero-poster-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-poster {
+  position: relative;
+  padding: 40px 24px;
+  min-height: 300px;
+  text-align: center;
+}
+
+.hero-poster h1,
+.hero-poster h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.hero-poster h3,
+.hero-poster h4,
+.hero-poster h5,
+.hero-poster h6 {
+  color: var(--text-color);
+  text-align: center;
+}
+
+.hero-poster p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.hero-poster.no-image * {
+  color: var(--text-color);
+}
+
+.hero-poster picture {
+  text-align: center;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.hero-poster img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.hero-poster .button-container {
+  text-align: center;
+}
+
+@media (width >= 900px) {
+  .hero-poster {
+    padding: 40px 32px;
+  }
+}

@@ -11,14 +11,33 @@
  * governing permissions and limitations under the License.
  */
 :root {
+  /* Colors extracted from original site */
   --background-color: white;
   --light-color: #f8f8f8;
   --dark-color: #505050;
-  --text-color: #131313;
+  --text-color: #1f1f1f; /* rgb(31, 31, 31) */
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
+
+  /* Brand colors from original site */
+  --accent-primary: rgb(187, 31, 59); /* Primary red/maroon */
+  --accent-secondary: rgb(243, 121, 6); /* Orange background */
+  --accent-white: rgb(255, 255, 255);
+
+  /* Recipe page specific colors */
+  --recipe-dark-bg: rgb(31, 31, 31); /* Dark section background */
+  --recipe-cream: rgb(249, 238, 196); /* Cream/beige color for tabs and cards */
+  --recipe-yellow: rgb(255, 218, 125); /* Yellow accent for text */
+  --recipe-brown: rgb(38, 16, 0); /* Brown text color */
+  --recipe-border: rgb(249, 238, 196); /* Border color for tabs */
+  --recipe-button-primary: rgb(191, 39, 27); /* Red button background */
+  --recipe-button-primary-hover: rgb(171, 29, 17); /* Red button hover */
+
+  /* Typography - extracted from original */
   --body-font-family: "Bricolage", "Bricolage Fallback";
   --heading-font-family: "Bricolage", "Bricolage Fallback";
+  --heading-font-family-alt: "Nunito", "Nunito Fallback"; /* For h3 elements */
+
   --body-font-size-m: 16px;
   --body-font-size-s: 13.28px;
   --body-font-size-xs: 10.72px;
@@ -28,6 +47,21 @@
   --heading-font-size-m: 16px;
   --heading-font-size-s: 13.28px;
   --heading-font-size-xs: 10.72px;
+
+  /* Button styling - extracted from original CTA buttons */
+  --button-primary-bg: rgb(255, 255, 255);
+  --button-primary-color: rgb(187, 31, 59);
+  --button-primary-bg-hover: rgb(245, 245, 245);
+
+  --button-secondary-bg: rgb(187, 31, 59);
+  --button-secondary-color: rgb(255, 255, 255);
+  --button-secondary-bg-hover: rgb(167, 21, 49);
+
+  --button-padding: 16px;
+  --button-border-radius: 800px; /* Pill-shaped buttons */
+  --button-font-weight: 700;
+  --button-font-size: 16px;
+
   --nav-height: 109px;
   --header-height: var(--nav-height);
 }
@@ -144,21 +178,26 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
   scroll-margin: 40px;
 }
 
 h1 {
   font-size: var(--heading-font-size-xxl);
+  font-weight: 500;
 }
 
 h2 {
   font-size: var(--heading-font-size-xl);
+  font-weight: 700;
+  line-height: 1.17;
 }
 
 h3 {
   font-size: var(--heading-font-size-l);
+  font-family: var(--heading-font-family-alt); /* Nunito for h3 */
+  font-weight: 700;
 }
 
 h4 {
@@ -213,28 +252,32 @@ a:hover {
 /* buttons */
 a.button:any-link, button {
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   max-width: 100%;
   margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border: 0;
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding);
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-color);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: background-color 0.2s ease;
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--button-primary-bg-hover);
   cursor: pointer;
 }
 
@@ -244,9 +287,13 @@ button:disabled, button:disabled:hover {
 }
 
 a.button.secondary, button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-color);
+}
+
+a.button.secondary:hover, a.button.secondary:focus,
+button.secondary:hover, button.secondary:focus {
+  background-color: var(--button-secondary-bg-hover);
 }
 
 main img {
@@ -294,6 +341,29 @@ main .section.light, main .section.highlight {
   padding: 40px 0;
 }
 
+main .section.orange {
+  background-color: var(--accent-secondary);
+  margin: 0;
+  padding: 40px 0;
+  color: var(--text-color);
+}
+
+main .section.orange h1,
+main .section.orange h2,
+main .section.orange h3,
+main .section.orange p {
+  color: var(--text-color);
+}
+
+main .section.orange a.button {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-color);
+}
+
+main .section.orange a.button:hover {
+  background-color: var(--button-primary-bg-hover);
+}
+
 .section.hidden {
   display: none;
 }
@@ -320,6 +390,28 @@ main .section.light, main .section.highlight {
 
 .section.section-6 {
   background: rgb(31 31 31) none repeat scroll 0% 0% / auto padding-box border-box;
+}
+
+/* Recipe listing page dark section styling */
+main .section.section-6 {
+  padding: 48px 0;
+  text-align: center;
+}
+
+main .section.section-6 h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.17;
+  margin-bottom: 4px;
+}
+
+main .section.section-6 h4 {
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-top: 0;
 }
 
 .section.section-7 {

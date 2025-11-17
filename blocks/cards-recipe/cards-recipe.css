@@ -1,0 +1,110 @@
+/* Recipe cards grid layout */
+.cards-recipe > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 19px 21px;
+}
+
+/* Each list item is the wrapper */
+.cards-recipe > ul > li {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card container with cream background */
+.cards-recipe .cards-recipe-card {
+  background-color: var(--recipe-cream);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+
+/* Card image container */
+.cards-recipe .cards-recipe-card-image {
+  line-height: 0;
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cards-recipe .cards-recipe-card-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
+
+/* Card body content */
+.cards-recipe .cards-recipe-card-body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+/* Title paragraph with strong */
+.cards-recipe .cards-recipe-card-body > p:first-child {
+  margin: 0;
+  display: block;
+}
+
+.cards-recipe .cards-recipe-card-body > p:first-child strong {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--recipe-brown);
+  line-height: 16px;
+  text-transform: capitalize;
+  display: block;
+}
+
+/* Rating paragraph (⭐ 4.9) */
+.cards-recipe .cards-recipe-card-body > p:nth-child(2) {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--recipe-brown);
+  line-height: 14px;
+  margin: 0;
+}
+
+/* Time and difficulty paragraph (⏱ 15 mins • easy) */
+.cards-recipe .cards-recipe-card-body > p:nth-child(3) {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--recipe-brown);
+  line-height: 14px;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+/* View Recipe link - hide it */
+.cards-recipe .cards-recipe-card-body > p:nth-child(4) {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (width >= 600px) {
+  .cards-recipe > ul {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px 22px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-recipe > ul {
+    grid-template-columns: repeat(auto-fill, minmax(247px, 1fr));
+    gap: 19px 21px;
+  }
+}

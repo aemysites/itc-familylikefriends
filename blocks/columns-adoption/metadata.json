@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-adoption",
+  "baseBlock": "columns",
+  "isParentBlock": false,
+  "parentBlockType": null,
+  "version": "1.0.0",
+  "created": "2025-11-17T07:46:30.000Z",
+  "sourceContext": {
+    "originUrl": "https://familylikefriends.com/adopt-with-love.html",
+    "originPage": "adoption awareness page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "standard",
+    "purpose": "info-display",
+    "imagePattern": "single"
+  },
+  "contentPattern": {
+    "structure": "2 columns: text + image",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "informational pages with text and image",
+      "feature explanations",
+      "side-by-side content layout"
+    ],
+    "notSuitableFor": [
+      "multiple column layouts",
+      "image galleries",
+      "card grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/adopt-with-love"],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17T07:46:30.000Z"
+  }
+}

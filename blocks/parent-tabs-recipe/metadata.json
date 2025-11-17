@@ -1,0 +1,29 @@
+{
+  "variantName": "parent-tabs-recipe",
+  "baseBlock": "tabs",
+  "isParentBlock": true,
+  "parentBlockType": "tabs",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "standard",
+    "purpose": "recipe-listing",
+    "imagePattern": "cards"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "recipe listing pages",
+      "tabbed content with cards"
+    ],
+    "notSuitableFor": [
+      "simple text tabs",
+      "accordion patterns"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/fantasy-recipes/recipe-listing"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17"
+  }
+}

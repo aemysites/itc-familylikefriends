@@ -1,0 +1,31 @@
+{
+  "variantName": "cards-recipe",
+  "baseBlock": "cards",
+  "isParentBlock": false,
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "standard",
+    "purpose": "recipe-cards",
+    "imagePattern": "4:3 aspect ratio",
+    "contentElements": ["image", "title", "rating", "time", "difficulty"]
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "recipe card grids",
+      "food listing pages",
+      "cards with ratings and metadata"
+    ],
+    "notSuitableFor": [
+      "text-only cards",
+      "hero cards",
+      "stats cards"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/fantasy-recipes/recipe-listing"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17"
+  }
+}

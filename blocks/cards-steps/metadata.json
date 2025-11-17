@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-steps",
+  "baseBlock": "cards",
+  "isParentBlock": false,
+  "parentBlockType": null,
+  "version": "1.0.0",
+  "created": "2025-11-17T07:20:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://familylikefriends.com/filmy-faces.html",
+    "originPage": "Filmy Faces landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "instructional-steps",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "icon + step label + description",
+    "buttonCount": 0,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "how-it-works sections",
+      "step-by-step instructions",
+      "process explanations with icons"
+    ],
+    "notSuitableFor": [
+      "product showcases with large images",
+      "text-only cards without icons"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/filmy-faces"],
+    "reuseCount": 1,
+    "lastUsed": "2025-11-17T07:20:00.000Z"
+  }
+}

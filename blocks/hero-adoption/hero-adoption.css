@@ -1,0 +1,61 @@
+.hero-adoption-container .hero-adoption-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-adoption {
+  padding: 24px;
+  text-align: center;
+  background-color: rgb(254, 245, 235);
+}
+
+.hero-adoption > div {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-adoption h1 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-color);
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.hero-adoption h1 strong {
+  color: var(--accent-primary);
+}
+
+.hero-adoption h3 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-family: var(--heading-font-family-alt);
+}
+
+.hero-adoption picture {
+  display: block;
+  margin: 0 auto;
+  max-width: 540px;
+}
+
+.hero-adoption img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+@media (width >= 900px) {
+  .hero-adoption {
+    padding: 40px 32px;
+  }
+
+  .hero-adoption h1 {
+    font-size: 36px;
+  }
+}
