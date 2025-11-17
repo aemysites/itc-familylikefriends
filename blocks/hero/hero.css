@@ -150,50 +150,28 @@
 }
 
 
-.hero.hero4 {
+.hero.hero4.block {
   background: #fff;
-  border-bottom: 2px solid #E09B63;
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: center; /* vertical align if content is present */
+  min-height: 220px;   /* adjust as needed for your design */
   width: 100%;
-  min-height: 0;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
 }
 
-/* Image handling (if you have an image as a child, not a background) */
-.hero.hero4 picture,
-.hero.hero4 img {
-  flex: 1;
-  max-width: 120px; /* Adjust as needed for your design */
-  width: 100%;
-  height: auto;
+/* Hide all content inside the block */
+.hero.hero4.block > * {
+  display: none;
+}
+
+/* Orange accent line at the bottom */
+.hero.hero4.block::after {
+  content: "";
   display: block;
-}
-
-/* Text/content area beside image */
-.hero.hero4 div {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0 32px 0 0;
-}
-
-/* Responsive: stack vertically on small screens */
-@media (width <= 700px) {
-  .hero.hero4 {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero.hero4 picture,
-  .hero.hero4 img,
-  .hero.hero4 div {
-    max-width: 100%;
-    width: 100%;
-    padding: 0;
-  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #e08751;
 }
