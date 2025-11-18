@@ -1,7 +1,11 @@
+.accordion-faq-container .accordion-faq-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 .accordion-faq {
   padding: 24px;
   background-color: white;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -78,8 +82,4 @@
   background-color: transparent;
 }
 
-@media (width >= 900px) {
-  .accordion-faq {
-    padding: 40px 32px;
-  }
-}
+

@@ -62,7 +62,7 @@
   --button-font-weight: 700;
   --button-font-size: 16px;
 
-  --nav-height: 109px;
+  --nav-height: 64px;
   --header-height: var(--nav-height);
 }
 
@@ -144,13 +144,14 @@
     --heading-font-size-m: 16px;
     --heading-font-size-s: 13.28px;
     --heading-font-size-xs: 10.72px;
-    --nav-height: 109px;
+    --nav-height: 64px;
   }
 }
 
 body {
   display: none;
   margin: 0;
+  width: 100%;
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: var(--body-font-family);
@@ -164,6 +165,9 @@ body.appear {
 
 header {
   height: var(--nav-height);
+  max-width: 540px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 header .header, footer .footer {
@@ -227,6 +231,12 @@ pre {
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
+}
+
+main {
+  max-width: 540px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 main>div {
@@ -319,7 +329,6 @@ main>.section {
 }
 
 main>.section>div {
-  max-width: 1200px;
   margin: auto;
   padding: 0 24px;
 }
@@ -328,10 +337,13 @@ main>.section:first-of-type {
   margin-top: 0;
 }
 
-@media (width>=900px) {
-  main>.section>div {
-    padding: 0 32px;
-  }
+
+
+/* Mobile-only design: footer also 540px */
+footer {
+  max-width: 540px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* section metadata */
@@ -341,10 +353,47 @@ main .section.light, main .section.highlight {
   padding: 40px 0;
 }
 
+main .section.light h2,
+main .section.highlight h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+main .section.light h2 strong,
+main .section.highlight h2 strong {
+  color: var(--accent-primary);
+}
+
+main .section.light > div > .default-content-wrapper p,
+main .section.highlight > div > .default-content-wrapper p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+main .section.light .button-container,
+main .section.highlight .button-container {
+  text-align: center;
+}
+
+main .section.light a.button,
+main .section.highlight a.button {
+  text-decoration: underline;
+  background: none;
+  color: var(--text-color);
+  padding: 0;
+  margin: 16px 0;
+  font-weight: 700;
+}
+
 main .section.orange {
   background-color: var(--accent-secondary);
   margin: 0;
-  padding: 40px 0;
+  padding: 24px 0;
   color: var(--text-color);
 }
 
@@ -353,15 +402,38 @@ main .section.orange h2,
 main .section.orange h3,
 main .section.orange p {
   color: var(--text-color);
+  text-align: center;
+}
+
+main .section.orange h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+main .section.orange p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+main .section.orange .button-container {
+  text-align: center;
 }
 
 main .section.orange a.button {
-  background-color: var(--button-primary-bg);
-  color: var(--button-primary-color);
+  text-decoration: underline;
+  background: none;
+  color: var(--text-color);
+  padding: 0;
+  margin: 8px 0;
+  font-weight: 700;
 }
 
 main .section.orange a.button:hover {
-  background-color: var(--button-primary-bg-hover);
+  background: none;
+  color: var(--text-color);
 }
 
 .section.hidden {

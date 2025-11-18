@@ -1,3 +1,8 @@
+.columns-adoption-container .columns-adoption-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 .columns-adoption {
   padding: 40px 24px;
   background-color: white;
@@ -7,7 +12,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -49,23 +53,4 @@
   display: block;
 }
 
-@media (width >= 900px) {
-  .columns-adoption {
-    padding: 60px 32px;
-  }
 
-  .columns-adoption > div {
-    align-items: center;
-    flex-direction: row;
-    gap: 48px;
-  }
-
-  .columns-adoption > div > div {
-    flex: 1;
-    order: unset;
-  }
-
-  .columns-adoption h2 {
-    font-size: 36px;
-  }
-}

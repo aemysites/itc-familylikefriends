@@ -1,18 +1,29 @@
+/* Parent tabs recipe wrapper */
+.parent-tabs-recipe-container .parent-tabs-recipe-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 /* Recipe tabs container */
 .parent-tabs-recipe {
-  padding: 0;
+  padding: 24px 24px 0;
 }
 
 .parent-tabs-recipe .parent-tabs-recipe-list {
   display: flex;
   gap: 0;
   max-width: 100%;
-  padding: 0 0 32px;
-  font-size: 16px;
+  padding: 0 0 24px;
+  font-size: 14px;
   overflow-x: auto;
   justify-content: flex-start;
   flex-wrap: nowrap;
   border-bottom: none;
+  scrollbar-width: none;
+}
+
+.parent-tabs-recipe .parent-tabs-recipe-list::-webkit-scrollbar {
+  display: none;
 }
 
 /* Tab buttons - pill shaped with cream border */
@@ -22,13 +33,13 @@
   margin-right: 8px;
   border: 1px solid var(--recipe-border);
   border-radius: 100px;
-  padding: 8px 20px;
+  padding: 10px 20px;
   background-color: transparent;
   color: var(--recipe-cream);
   font-family: var(--body-font-family);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.3;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -71,15 +82,4 @@
   display: none;
 }
 
-/* Responsive adjustments */
-@media (width >= 600px) {
-  .parent-tabs-recipe .parent-tabs-recipe-list {
-    font-size: 16px;
-  }
-}
-
-@media (width >= 900px) {
-  .parent-tabs-recipe .parent-tabs-recipe-list {
-    font-size: 16px;
-  }
-}
+/* Mobile-only: no responsive breakpoints */

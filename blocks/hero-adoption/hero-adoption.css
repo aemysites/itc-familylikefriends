@@ -10,7 +10,6 @@
 }
 
 .hero-adoption > div {
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -41,21 +40,10 @@
 .hero-adoption picture {
   display: block;
   margin: 0 auto;
-  max-width: 540px;
 }
 
 .hero-adoption img {
   width: 100%;
   height: auto;
   border-radius: 12px;
-}
-
-@media (width >= 900px) {
-  .hero-adoption {
-    padding: 40px 32px;
-  }
-
-  .hero-adoption h1 {
-    font-size: 36px;
-  }
 }

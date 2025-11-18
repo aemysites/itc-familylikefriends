@@ -1,3 +1,8 @@
+.cards-stats-container .cards-stats-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 .cards-stats {
   padding: 40px 24px;
   background-color: white;
@@ -8,9 +13,8 @@
   margin: 0 auto;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 32px;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 16px;
 }
 
 .cards-stats > ul > li {
@@ -49,12 +53,3 @@
   object-fit: cover;
 }
 
-@media (width >= 900px) {
-  .cards-stats {
-    padding: 60px 32px;
-  }
-
-  .cards-stats h2 {
-    font-size: 64px;
-  }
-}

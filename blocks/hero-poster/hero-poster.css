@@ -5,18 +5,29 @@
 
 .hero-poster {
   position: relative;
-  padding: 40px 24px;
+  padding: 24px;
   min-height: 300px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.hero-poster > div {
+  width: 100%;
 }
 
 .hero-poster h1,
 .hero-poster h2 {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--text-color);
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  margin-top: 0;
+  line-height: 1.2;
 }
 
 .hero-poster h3,
@@ -32,7 +43,8 @@
   font-weight: 500;
   color: var(--text-color);
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+  line-height: 1.4;
 }
 
 .hero-poster.no-image * {
@@ -42,22 +54,25 @@
 .hero-poster picture {
   text-align: center;
   display: block;
-  margin-bottom: 24px;
+  margin: 0;
 }
 
 .hero-poster img {
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  display: inline-block;
+  display: block;
 }
 
 .hero-poster .button-container {
   text-align: center;
+  margin-top: 8px;
 }
 
-@media (width >= 900px) {
-  .hero-poster {
-    padding: 40px 32px;
-  }
+.hero-poster a.button {
+  text-decoration: underline;
+  background: none;
+  color: var(--text-color);
+  padding: 0;
+  margin: 0;
+  font-weight: 700;
 }
