@@ -12,13 +12,13 @@ The migration leverages **Experience Catalyst**, an AI based migration tool that
 - **AEM Edge Delivery Site**: https://main--itc-familylikefriends--aemysites.aem.page/
 - **Repository**: https://github.com/aemysites/itc-familylikefriends
 - **Migration Approach**: Experience Catalyst + Manual Refinement
-- **Status**: 3 pages migrated and styled (requiring minor refinement), 30+ pages partially migrated
+- **Status**: 3 pages migrated and styled (requiring minor refinement), 30+ pages partially migrated (requiring iterative refinement)
 
 ### Quick Start
 
-**Ready to build on this foundation?** Jump to [Section 4: How to Complete the Remaining Work](#4-how-to-complete-the-remaining-work) to see your two options.
+**Ready to build on this foundation?** Jump to [Section 4: Completing the Remaining Work](#4-completing-the-remaining-work) for guidance.
 
-**Want to understand what's missing?** Check [Section 3.3: Content & Styling Gaps](#33-content--styling-gaps-analysis) for detailed page-by-page analysis.
+**Want to understand what needs refinement?** Check [Section 3.3: Content & Styling Gaps](#33-content--styling-gaps-analysis) for page-by-page analysis.
 
 **Want to set up locally?** See [Section 2.2: Local Development Setup](#22-local-development-setup) to start developing.
 
@@ -28,9 +28,9 @@ The migration leverages **Experience Catalyst**, an AI based migration tool that
 
 ## 1. What You're Receiving in This Handover
 
-### 1.1 Migrated Pages
+### 1.1 Migrated and Styled Pages
 
-Three pages have been migrated and styled using Experience Catalyst (minor refinements needed - see Section 3.3 for details):
+Three pages have been migrated and styled with custom blocks (near completion, minor refinements needed):
 
 | Page | Original URL | Migrated URL |
 |------|-------------|--------------|
@@ -38,7 +38,11 @@ Three pages have been migrated and styled using Experience Catalyst (minor refin
 | **Fantasy Recipes Listing** | [familylikefriends.com/fantasy-recipes/recipe-listing.html](https://familylikefriends.com/fantasy-recipes/recipe-listing.html) | [View Page](https://main--itc-familylikefriends--aemysites.aem.page/fantasy-recipes/recipe-listing) |
 | **Filmy Faces** | [familylikefriends.com/filmy-faces.html](https://familylikefriends.com/filmy-faces.html) | [View Page](https://main--itc-familylikefriends--aemysites.aem.page/filmy-faces) |
 
-### 1.2 Custom Blocks Developed
+### 1.2 Additional Migrated Pages
+
+30+ additional pages have been partially migrated through Experience Catalyst with content present. These pages require iterative refinement for styling, content completeness, and functionality via Experience Catalyst or manually. See Section 3.1 for complete status and list.
+
+### 1.3 Custom Blocks Developed
 
 The following custom blocks have been created specifically for the FLF site. **Note**: Only these custom blocks have been implemented; standard AEM boilerplate blocks are available in the codebase but have not been styled or customized for this project.
 
@@ -68,13 +72,13 @@ The following custom blocks have been created specifically for the FLF site. **N
 - **`accordion-faq`** - FAQ accordion component
   - *Used in*: `/adopt-with-love`
 
-### 1.3 Core Infrastructure
+### 1.4 Core Infrastructure
 
 - **Header/Footer**: Basic styling matches original - navigation structure requires work
 - **Mobile Optimization**: Responsive design implemented across 3 migrated pages
 - **Global Styles**: Some brand-aligned color schemes, typography, icons
 
-### 1.4 Configuration Files
+### 1.5 Configuration Files
 
 - **`fstab.yaml`** - Content source configuration (SharePoint or Google Drive)
 - **`helix-query.yaml`** - Query index configuration
@@ -187,52 +191,22 @@ Media queries are already established in global styles (`styles/styles.css`).
 
 ---
 
-## 3. What's Remaining to Be Done
+## 3. Remaining Work & Refinements
 
-### 3.1 Page Migration
+### 3.1 Page Refinement Status
 
-The following pages from the original site still need to be migrated (based on `tools/importer/site-urls.json`):
+Most pages from the original site have been partially migrated through Experience Catalyst (based on `tools/importer/site-urls.json`). These pages require iterative refinement for styling, content completeness, and functionality via Experience Catalyst or manually:
 
-- **Homepage** (`/`)
-  - Sections (filmy faces, family frames)
-  - Recipe carousel
-  - Blog/content showcase
-  
-- **Family Frames** (`/family-frames.html`)
-  - Main landing page for photo-to-video conversion feature
-  - Upload flow pages (`/family-frames/upload-family-photo.html`)
-  - Frame listing (`/family-frames/upload-family-photo/frame-listing.html`)
-  - Frame ready page (`/family-frames/upload-family-photo/frame-ready.html`)
-  - Memory gallery (`/family-frames/upload-family-photo/memory-gallery.html`)
+- **Homepage** (`/`) - Requires styling refinement, carousel functionality, and blog showcase
+- **Family Frames** (`/family-frames.html`) - Main page and upload flow pages need styling and interactive features
+- **Fantasy Recipes Landing** (`/fantasy-recipes.html`) - Needs styling refinement
+- **Individual Recipe Pages** (10 pages under `/fantasy-recipes/recipe-listing/`) - Require recipe detail blocks and styling
+- **Filmy Faces Sub-Pages** - Upload flow and gallery pages need refinement
+- **Blog Pages** - Content present but needs blog-specific styling and components
+- **User Authentication & Profile** - Require backend integration and styling
+- **Informational Pages** (About Us, FAQs, Privacy Policy, Terms, etc.) - Need styling consistency
 
-- **Fantasy Recipes Landing** (`/fantasy-recipes.html`)
-  - Main landing page for recipes section
-
-- **Individual Recipe Pages** (10 recipe detail pages under `/fantasy-recipes/recipe-listing/` - see `site-urls.json` for full list)
-
-- **Filmy Faces Sub-Pages**
-  - Posters listing (`/filmy-faces/posters-listing.html`)
-  - Upload faces flow (`/filmy-faces/posters-listing/upload-faces.html`)
-  - Poster ready (`/filmy-faces/posters-listing/poster-ready.html`)
-  - My posters (`/filmy-faces/posters-listing/my-posters.html`)
-  - Created poster listing (`/filmy-faces/posters-listing/created-poster-listing.html`)
-
-- **Blog Pages** (8 blog articles + listing page)
-  - Blog listing (`/blogs.html`)
-  - Individual blog articles (10 Best Bollywood Movies, Birthday Games, Weekend Activities, etc.)
-
-- **User Authentication & Profile**
-  - Login page (`/login.html`)
-  - Profile page (`/login/profile.html`)
-  - Notifications (`/notifications.html`)
-
-- **Informational Pages**
-  - About Us (`/about-us.html`)
-  - FAQs (`/faqs.html`)
-  - Privacy Policy (`/privacy-policy.html`)
-  - Terms and Conditions (`/terms-and-conditions.html`)
-  - Sitemap (`/sitemap.html`)
-  - Nameplate Pledge (`/nameplate-pledge.html`)
+**Complete page list available in**: `tools/importer/site-urls.json`
 
 ### 3.2 Missing Blocks & Components
 
@@ -298,114 +272,46 @@ These require backend services beyond block development:
 
 ### 3.3 Content & Styling Gaps Analysis
 
-Based on comparison of original pages with migrated versions, here are specific gaps that need addressing:
+Key refinements needed across migrated pages:
 
-#### Homepage Analysis
-- **Original**: https://familylikefriends.com/
-- **Migrated**: https://main--itc-familylikefriends--aemysites.aem.page/
-- **Status**: Partially migrated (some content present, significant styling and functionality gaps)
+#### Homepage
+- ✅ Content structure, sections, footer present
+- ❌ Needs: Styling refinement, carousel functionality, blog showcase, interactive elements
 
-**What's Working:**
-- ✅ Basic content structure
-- ✅ "Create your filmy family's Fantasy Moment" section
-- ✅ "Make family memories move like Magic" section
-- ✅ "Family fun showcase" section
-- ✅ Footer with social links
-- ✅ CTA buttons with links
-
-**What Needs Work:**
-- ❌ Hero video banner (if present in original)
-- ❌ Styling to match original design
-- ❌ Image optimization and proper display
-- ❌ "Family fun showcase" carousel functionality
-- ❌ "Fun Times Ahead" blog showcase with cards
-- ❌ Responsive design and mobile optimization
-- ❌ Interactive elements and animations
-- ❌ Brand-aligned colors, fonts, and spacing
-
-#### Blog Page Example
-- **Original**: https://familylikefriends.com/blogs/10-fun-things-to-do-with-your-family-this-weekend.html
-- **Migrated**: https://main--itc-familylikefriends--aemysites.aem.page/blogs/10-fun-things-to-do-with-your-family-this-weekend
-- **Status**: Partially migrated (content only, styling incomplete)
-
-**What's Working:**
-- ✅ Basic content structure
-- ✅ Text content migrated
-- ✅ Heading hierarchy
-
-**What Needs Work:**
-- ❌ Hero image/banner styling
-- ❌ Rich text formatting (blockquotes, lists, inline images)
-- ❌ Related articles section
-- ❌ Social sharing buttons
-- ❌ Breadcrumb navigation
-- ❌ Reading time indicator
-- ❌ Author information block
-- ❌ CTA buttons ("Start Creating", etc.)
+#### Blog Pages
+- ✅ Content and heading hierarchy present
+- ❌ Needs: Hero styling, rich text formatting, related articles, social sharing, breadcrumbs
 
 #### Recipe Listing Page
-- **Original**: https://familylikefriends.com/fantasy-recipes/recipe-listing.html
-- **Migrated**: https://main--itc-familylikefriends--aemysites.aem.page/fantasy-recipes/recipe-listing
-- **Status**: Migrated with custom `cards-recipe` and `parent-tabs-recipe` blocks
-
-**What's Working:**
-- ✅ Recipe cards layout
-- ✅ Tab interface for categories
-- ✅ Responsive grid
-- ✅ Images and descriptions
-
-**What Needs Work:**
-- ❌ Filter/search functionality (if present on original)
-- ❌ Recipe detail page linking
-- ❌ Print recipe functionality
-- ❌ Share recipe buttons
+- ✅ Recipe cards, tabs, responsive grid implemented
+- ❌ Needs: Search/filter functionality, print feature, enhanced linking
 
 #### Filmy Faces Page
-- **Original**: https://familylikefriends.com/filmy-faces.html
-- **Migrated**: https://main--itc-familylikefriends--aemysites.aem.page/filmy-faces
-- **Status**: Migrated with custom blocks
+- ✅ Hero, carousel, layout implemented
+- ❌ Needs: Upload flow, template selection, user gallery, download functionality
 
-**What's Working:**
-- ✅ Hero section
-- ✅ Template carousel
-- ✅ Basic layout
-
-**What Needs Work:**
-- ❌ Upload flow integration
-- ❌ Poster template selection
-- ❌ User gallery/showcase
-- ❌ Download functionality
+**Compare pages at:**
+- Original: https://familylikefriends.com/
+- Migrated: https://main--itc-familylikefriends--aemysites.aem.page/
 
 ### 3.4 Integration Requirements
 
-1. **Backend APIs**
-   - User authentication service
-   - Image processing service
-   - Content management APIs
-   - Social sharing APIs
+- **Backend APIs**: Authentication, image processing, content management, social sharing
+- **Third-Party Services**: Social media platforms, video processing, email
+- **Content Management**: SharePoint/Google Drive connection, workflows, permissions
 
-2. **Third-Party Services**
-   - Social media platforms (Facebook, Instagram, YouTube)
-   - Video processing services
-   - Email services
-
-3. **Content Management**
-   - Connect SharePoint (or Google Drive) for content authoring
-   - Set up content workflows
-   - Configure publishing permissions
+See Section 4.3 for backend development details.
 
 ---
 
-## 4. How to Complete the Remaining Work
+## 4. Completing the Remaining Work
 
-Use the delivered output as a foundation and build out the remaining pages using AEM Edge Delivery's standard development approach.
+Build on the delivered foundation to refine migrated pages and complete missing functionality:
 
-**What Needs to Be Done:**
-- Use the custom blocks already created (hero-adoption, cards-recipe, etc.) as templates
-- Follow the parser patterns in `tools/importer/parsers/` to create new content import scripts
-- Develop additional blocks needed (video, blog templates, image galleries - see Section 3.2)
-- Author content in Microsoft Word/SharePoint following AEM Edge Delivery conventions
-- Style and test all pages for responsive behavior and performance
+- Reuse and adapt existing custom blocks (hero-adoption, cards-recipe, etc.)
+- Develop additional blocks as needed (see Section 3.2)
+- Refine styling and responsive behavior
+- Implement backend integrations (see Section 4.3)
 
 ### 4.1 Using the Delivered Output as Your Foundation
 
@@ -413,67 +319,41 @@ The three migrated pages provide working examples of how to build FLF-specific b
 
 #### Understanding the Delivered Blocks
 
-Each delivered block follows a consistent pattern. Let's examine `hero-adoption` as an example:
+Each custom block follows AEM Edge Delivery patterns:
+- Self-contained with CSS and JS in its own directory
+- `metadata.json` contains style guide info from original site
+- Mobile-first responsive design
+- Performance-optimized (lazy loading, efficient DOM manipulation)
 
-```1:20:blocks/hero-adoption/hero-adoption.js
-// The block receives the raw content table from the document
-export default async function decorate(block) {
-  // 1. Extract content from the block structure
-  // 2. Create new DOM elements with semantic HTML
-  // 3. Apply classes for styling
-  // 4. Replace block content with decorated version
-}
-```
-
-**Key Learnings:**
-- Blocks are self-contained: CSS and JS in their own directory
-- `metadata.json` contains style guide info from the original site
-- Mobile-first responsive design is built-in
-- Performance optimization is standard (lazy loading, efficient DOM manipulation)
+Reference existing blocks (e.g., `hero-adoption`, `cards-recipe`) as templates when creating new ones.
 
 #### Reusing Existing Blocks
 
-Before creating new blocks, check if existing ones can be adapted:
+Before creating new blocks, check if existing ones can be adapted. The codebase includes both custom-styled blocks and standard AEM blocks:
 
+**Custom Blocks (Styled for FLF):**
 1. **Recipe cards** (`cards-recipe`) - Can be adapted for blog post cards
 2. **Hero sections** (`hero-adoption`, `hero-poster`) - Templates for other hero variants
 3. **Tabs** (`parent-tabs-recipe`) - Reusable for any tabbed content
 4. **Accordions** (`accordion-faq`) - Standard collapsible sections
+5. **Stats cards** (`cards-stats`) - Can be adapted for various data display needs
+6. **Step cards** (`cards-steps`) - Reusable for process/tutorial content
+
+**Standard Blocks (Available to Adapt):**
+- `hero`, `cards`, `columns`, `carousel`, `accordion`, `tabs`, `quote`, `video`, `embed`, `fragment`, `modal`, `table`, `search`
+
+These standard blocks provide starting templates that can be customized with FLF-specific styling and functionality.
 
 #### Creating New Blocks
 
-When you need a new block (e.g., video block, blog template):
+When you need a new block, follow the standard AEM Edge Delivery workflow:
 
-**Step 1: Create Block Structure**
-```bash
-mkdir blocks/video
-touch blocks/video/video.js
-touch blocks/video/video.css
-```
+1. **Create block structure** in `blocks/blockname/`
+2. **Study similar blocks** for patterns (DOM manipulation, responsive design, interactivity)
+3. **Author content** in Microsoft Word using table structure
+4. **Test locally** with `aem up`
 
-**Step 2: Study Similar Blocks**
-Look at existing blocks for patterns:
-- How they extract configuration
-- How they build DOM structure
-- How they handle responsive design
-- How they add interactivity
-
-**Step 3: Implement Using AEM Patterns**
-Follow AEM Edge Delivery conventions (see Block Development Best Practices in Section 4.2)
-
-**Step 4: Author Content in Microsoft Word**
-Create a document with a table structure that matches your block:
-
-| Video |
-|-------|
-| https://www.youtube.com/embed/xxxxx |
-| Video caption here |
-
-**Step 5: Test Locally**
-```bash
-aem up
-# Visit http://localhost:3000/your-page
-```
+See Section 4.2 for detailed best practices and [Block Collection](https://www.aem.live/developer/block-collection) for reference implementations.
 
 ### 4.2 Block Development Best Practices
 
@@ -492,66 +372,47 @@ For detailed guidance on creating and styling blocks, refer to the official AEM 
 
 ### 4.3 Backend Development
 
-While AEM Edge Delivery is primarily front-end focused, backend services are needed for:
+Backend services are needed for:
+- User authentication (login, profile, sessions)
+- Image/video processing (Filmy Faces, Family Frames)
+- Interactive features (likes, shares, ratings)
+- Recipe functionality (search, filtering, print)
+- User-generated content storage
+- Analytics and tracking
 
-1. **User Authentication** - Login/logout, profile management, session handling
-2. **Image/Video Processing** - Filmy Faces poster creation, Family Frames photo-to-video conversion, recipe video transcoding and delivery
-3. **Like/Share Functionality** - Like counters, social media sharing APIs
-4. **Recipe Features** - Rating system (star ratings, vote counts), search/filtering, category management, print functionality
-5. **Content Storage** - User-generated content, uploaded images/videos, recipe media assets (step images, videos)
-6. **Analytics** - User behavior tracking, conversion metrics, recipe engagement analytics
+See Section 3.2 for detailed integration requirements.
 
 ### 4.4 Recommended Development Workflow
 
-**If Using Traditional Content Importer**: Follow this phased approach:
-
-#### Phase 1: Content Migration
-1. Inventory all remaining pages (refer to Section 3.1 for complete list)
-2. Set up content source (SharePoint / Google Drive)
-3. Write custom import scripts for each page type
-4. Migrate homepage and critical landing pages
+#### Phase 1: Content Refinement
+1. Review migrated pages (see Section 3.1 for status)
+2. Refine styling and content completeness
+3. Test responsive behavior across devices
 
 #### Phase 2: Block Development
-1. Develop remaining custom blocks
+1. Develop missing blocks (see Section 3.2)
 2. Implement interactive features
-3. Ensure responsive behavior
-4. Conduct cross-browser testing
+3. Conduct cross-browser testing
 
 #### Phase 3: Backend Integration
 1. Set up authentication services
-2. Implement image processing APIs
+2. Implement image/video processing
 3. Integrate third-party services
-4. Test end-to-end functionality
 
-#### Phase 4: QA & Optimization
-1. Performance testing and optimization
-2. Accessibility audit
-3. Security review
-4. User acceptance testing
-
-#### Phase 5: Launch Preparation
-1. DNS configuration
-2. CDN setup
-3. Analytics implementation
-4. Final pre-launch checklist
+#### Phase 4: QA & Launch
+1. Performance testing (target: 100 Lighthouse scores)
+2. Accessibility and security review
+3. User acceptance testing
+4. DNS, CDN, and analytics setup
 
 **Go Live Checklist**: [Launch Guide](https://www.aem.live/docs/go-live-checklist)
 
 ### 4.5 Testing & Quality Assurance
 
-#### Performance Testing
-- **Target**: 100 Lighthouse scores across all metrics
-- **Tools**: [PageSpeed Insights](https://pagespeed.web.dev/)
-- Test on 3G networks for realistic conditions
-
-#### Cross-Browser Testing
-- Chrome, Firefox, Safari, Edge
-- iOS Safari, Chrome Mobile
-- Test responsive breakpoints: 375px, 768px, 1024px, 1440px
-
-#### Accessibility Testing
-- Keyboard navigation
-- Semantic HTML validation
+- **Performance**: Target 100 Lighthouse scores ([PageSpeed Insights](https://pagespeed.web.dev/))
+- **Cross-Browser**: Chrome, Firefox, Safari, Edge, mobile browsers
+- **Responsive**: Test at 375px, 768px, 1024px, 1440px breakpoints
+- **Accessibility**: Keyboard navigation, semantic HTML, ARIA labels
 
 ---
 
@@ -643,23 +504,28 @@ The following web fonts are configured in `styles/fonts.css`:
 
 ## 6. Conclusion
 
-### What Has Been Shared
+### What Has Been Delivered
 
-✅ **3 Migrated Pages (Near Completion)**
-- Adopt with Love (styled, minor gaps remaining - see Section 3.3)
-- Fantasy Recipes Listing (with custom tabs and cards, minor refinement needed)
-- Filmy Faces (with template carousel, additional features needed)
+✅ **Pages Migrated and Styled (Near Completion)**
+- Adopt with Love - Custom adoption blocks implemented
+- Fantasy Recipes Listing - Tabs and cards with styling
+- Filmy Faces - Template carousel and hero
 
-✅ **Foundation for Completing the Site**
-- 8+ custom, reusable blocks ready to adapt
-- Header, footer, and global styles configured
-- Working parser examples in `tools/importer/parsers/`
-- Complete page inventory in `site-urls.json`
+✅ **Additional Pages (Require Iterative Refinement)**
+- 30+ pages partially migrated through Experience Catalyst with content present
+- Refinement can be done via Experience Catalyst or manually
+- See Section 3.1 for complete status
 
-✅ **Development Environment**
+✅ **Foundation for Completion**
+- 8+ custom, reusable blocks
+- Standard AEM blocks available for adaptation
+- Header, footer, global styles configured
+- Parser examples and migration tools in `tools/importer/`
+
+✅ **Ready Development Environment**
 - GitHub repository with all code
-- SharePoint content source configured
-- Local development tools ready (`aem up`)
+- Content source configured
+- Local development ready (`aem up`)
 
 ---
 
@@ -679,7 +545,6 @@ The following web fonts are configured in `styles/fonts.css`:
 - **fstab.yaml**: Configuration file that maps content sources (SharePoint/Google Drive) to the site
 
 ### Migration Terms
-- **Experience Catalyst**: Adobe-operated AI-powered migration service used to create this initial migration
-- **Content Importer**: Traditional manual self-service approach to migrating content
+- **Experience Catalyst**: AI-powered migration tool used to accelerate Edge Delivery Service migration
 - **Parser**: JavaScript module that transforms HTML from the original site into AEM Edge Delivery format
 - **Transformer**: Utility that handles cross-cutting transformations (images, links, sections, cleanup)
