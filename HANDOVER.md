@@ -523,8 +523,8 @@ The following web fonts are configured in `styles/fonts.css`:
 - Parser examples and migration tools in `tools/importer/`
 
 ✅ **Ready Development Environment**
-- GitHub repository with all code
-- Content source configured
+- Project repository with code
+- Imported pages/content
 - Local development ready (`aem up`)
 
 ---
